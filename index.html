@@ -4,75 +4,69 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Salud Escolar — Módulos de Bienestar</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;600;700;800&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --smoke: #0f111a;
-    --green: #00d4aa;
-    --green-soft: rgba(0, 212, 170, 0.15);
-    --blue: #4fc3f7;
-    --blue-soft: rgba(79, 195, 247, 0.15);
-    --red: #ff6b6b;
-    --red-soft: rgba(255, 107, 107, 0.15);
-    --gold: #ffd166;
-    --white: #f8fafc;
-    --muted: #94a3b8;
-    --glass-bg: rgba(255, 255, 255, 0.03);
-    --glass-border: rgba(255, 255, 255, 0.08);
+    /* LIQUID NEON PALETTE */
+    --bg-dark: #050508;
+    --bg-panel: rgba(15, 15, 20, 0.6);
+    
+    --neon-green: #00ff9d;
+    --neon-green-glow: rgba(0, 255, 157, 0.4);
+    
+    --neon-cyan: #00e5ff;
+    --neon-cyan-glow: rgba(0, 229, 255, 0.4);
+    
+    --neon-magenta: #ff00ea;
+    --neon-magenta-glow: rgba(255, 0, 234, 0.4);
+    
+    --neon-yellow: #fffb00;
+    --neon-red: #ff3366;
+    
+    --white: #ffffff;
+    --text-muted: #a0aabf;
+    --glass-border: rgba(255, 255, 255, 0.1);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
-    background-color: var(--smoke);
+    background-color: var(--bg-dark);
     color: var(--white);
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     min-height: 100vh;
     overflow-x: hidden;
     line-height: 1.6;
   }
 
-  /* ANIMATED BACKGROUND MESH */
-  .bg-mesh {
+  /* LIQUID ANIMATED BACKGROUND */
+  .liquid-bg {
     position: fixed;
     inset: 0;
     z-index: 0;
     pointer-events: none;
     overflow: hidden;
+    background: radial-gradient(circle at 50% 50%, #0a0a12 0%, #000000 100%);
   }
-  .bg-mesh::before, .bg-mesh::after, .bg-mesh-3 {
-    content: '';
+  .blob {
     position: absolute;
-    border-radius: 50%;
-    filter: blur(100px);
-    opacity: 0.4;
-    animation: float 20s infinite alternate ease-in-out;
+    filter: blur(90px);
+    opacity: 0.5;
+    animation: liquidMove 20s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
   }
-  .bg-mesh::before {
-    width: 600px; height: 600px;
-    background: radial-gradient(circle, rgba(0,212,170,0.15) 0%, transparent 70%);
-    top: -10%; left: -10%;
-  }
-  .bg-mesh::after {
-    width: 500px; height: 500px;
-    background: radial-gradient(circle, rgba(79,195,247,0.12) 0%, transparent 70%);
-    bottom: -10%; right: -10%;
-    animation-delay: -5s;
-  }
-  .bg-mesh-3 {
-    width: 400px; height: 400px;
-    background: radial-gradient(circle, rgba(255,209,102,0.08) 0%, transparent 70%);
-    top: 40%; left: 40%;
-    animation-delay: -10s;
-  }
+  .blob-1 { width: 50vw; height: 50vw; background: var(--neon-green-glow); top: -10%; left: -10%; animation-delay: 0s; }
+  .blob-2 { width: 40vw; height: 40vw; background: var(--neon-cyan-glow); bottom: -10%; right: -10%; animation-delay: -5s; }
+  .blob-3 { width: 45vw; height: 45vw; background: var(--neon-magenta-glow); top: 30%; left: 30%; animation-delay: -10s; }
 
-  @keyframes float {
-    0% { transform: translate(0, 0) scale(1); }
-    100% { transform: translate(50px, 50px) scale(1.1); }
+  @keyframes liquidMove {
+    0% { transform: translate(0, 0) scale(1) rotate(0deg); border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+    50% { border-radius: 60% 40% 30% 70% / 50% 60% 40% 50%; }
+    100% { transform: translate(10vw, 10vh) scale(1.2) rotate(45deg); border-radius: 30% 70% 50% 50% / 60% 40% 70% 30%; }
   }
 
   /* TYPOGRAPHY */
-  h1, h2, h3, h4, .font-syne { font-family: 'Syne', sans-serif; }
+  h1, h2, h3, h4, .font-syne { font-family: 'Montserrat Alternates', sans-serif; }
   strong { font-weight: 700; color: #fff; }
 
   /* HERO */
@@ -80,54 +74,57 @@
     position: relative;
     z-index: 1;
     text-align: center;
-    padding: 80px 24px 60px;
+    padding: 100px 24px 60px;
   }
 
   .hero-badge {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: var(--glass-bg);
+    background: rgba(255, 255, 255, 0.05);
     border: 1px solid var(--glass-border);
     backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
     color: var(--white);
-    font-family: 'Syne', sans-serif;
-    font-size: 11px;
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-size: 12px;
     font-weight: 700;
     letter-spacing: 2px;
     text-transform: uppercase;
-    padding: 8px 20px;
+    padding: 10px 24px;
     border-radius: 100px;
-    margin-bottom: 24px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    margin-bottom: 30px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
   }
-  .hero-badge span { width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 10px var(--green); }
+  .hero-badge span { width: 8px; height: 8px; border-radius: 50%; background: var(--white); box-shadow: 0 0 10px #fff; }
 
   .hero h1 {
-    font-size: clamp(40px, 7vw, 72px);
+    font-size: clamp(40px, 7vw, 76px);
     font-weight: 800;
-    line-height: 1.05;
+    line-height: 1.1;
     letter-spacing: -2px;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
+    text-transform: uppercase;
   }
   .hero h1 span {
-    background: linear-gradient(135deg, var(--green), var(--blue));
+    background: linear-gradient(135deg, var(--neon-green), var(--neon-cyan), var(--neon-magenta));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    animation: hueRotate 10s infinite linear;
   }
+  @keyframes hueRotate { to { filter: hue-rotate(360deg); } }
+
   .hero p {
-    color: var(--muted);
+    color: var(--text-muted);
     font-size: 18px;
     font-weight: 300;
-    max-width: 540px;
+    max-width: 600px;
     margin: 0 auto 48px;
   }
 
-  /* MODULE BUTTONS */
+  /* LIQUID NEON BUTTONS (MODULES) */
   .module-buttons {
     display: flex;
-    gap: 24px;
+    gap: 30px;
     justify-content: center;
     flex-wrap: wrap;
     padding: 0 24px;
@@ -138,913 +135,604 @@
   .mod-btn {
     position: relative;
     overflow: hidden;
-    border: 1px solid var(--glass-border);
     cursor: pointer;
-    border-radius: 24px;
-    padding: 36px 40px;
-    width: 340px;
+    padding: 40px;
+    width: 320px;
     text-align: left;
-    background: rgba(255, 255, 255, 0.02);
+    background: var(--bg-panel);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    border: 1px solid rgba(255,255,255,0.05);
+    /* Liquid shape */
+    border-radius: 40px;
+    transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
     outline: none;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    z-index: 1;
   }
 
   .mod-btn::before {
-    content: ''; position: absolute; inset: 0; opacity: 0; transition: opacity 0.4s ease;
+    content: ''; position: absolute; inset: 0; opacity: 0; transition: opacity 0.5s ease; z-index: -1;
+    border-radius: inherit;
   }
 
-  .mod-btn:hover { transform: translateY(-8px); border-color: rgba(255,255,255,0.2); }
-  .mod-btn.smoke-btn:hover::before { opacity: 1; background: radial-gradient(circle at top right, rgba(0,212,170,0.1), transparent 70%); }
-  .mod-btn.screen-btn:hover::before { opacity: 1; background: radial-gradient(circle at top right, rgba(79,195,247,0.1), transparent 70%); }
+  /* Neon variations */
+  .mod-btn.m1-btn:hover { border-color: var(--neon-green); box-shadow: 0 0 30px var(--neon-green-glow); transform: translateY(-10px); }
+  .mod-btn.m1-btn:hover::before { opacity: 1; background: radial-gradient(circle at top right, rgba(0,255,157,0.15), transparent 70%); }
+  .mod-btn.m1-btn.active { border-color: var(--neon-green); box-shadow: 0 0 40px var(--neon-green-glow), inset 0 0 20px var(--neon-green-glow); }
+
+  .mod-btn.m2-btn:hover { border-color: var(--neon-cyan); box-shadow: 0 0 30px var(--neon-cyan-glow); transform: translateY(-10px); }
+  .mod-btn.m2-btn:hover::before { opacity: 1; background: radial-gradient(circle at top right, rgba(0,229,255,0.15), transparent 70%); }
+  .mod-btn.m2-btn.active { border-color: var(--neon-cyan); box-shadow: 0 0 40px var(--neon-cyan-glow), inset 0 0 20px var(--neon-cyan-glow); }
+
+  .mod-btn.m3-btn:hover { border-color: var(--neon-magenta); box-shadow: 0 0 30px var(--neon-magenta-glow); transform: translateY(-10px); }
+  .mod-btn.m3-btn:hover::before { opacity: 1; background: radial-gradient(circle at top right, rgba(255,0,234,0.15), transparent 70%); }
+  .mod-btn.m3-btn.active { border-color: var(--neon-magenta); box-shadow: 0 0 40px var(--neon-magenta-glow), inset 0 0 20px var(--neon-magenta-glow); }
+
+  .btn-icon { font-size: 48px; margin-bottom: 20px; display: block; filter: drop-shadow(0 0 10px rgba(255,255,255,0.5)); transition: transform 0.3s; }
+  .mod-btn:hover .btn-icon { transform: scale(1.1); }
   
-  .mod-btn.smoke-btn.active { border-color: var(--green); box-shadow: 0 0 0 1px var(--green), 0 20px 40px rgba(0,212,170,0.15); background: rgba(0,212,170,0.03); }
-  .mod-btn.screen-btn.active { border-color: var(--blue); box-shadow: 0 0 0 1px var(--blue), 0 20px 40px rgba(79,195,247,0.15); background: rgba(79,195,247,0.03); }
+  .btn-tag { font-family: 'Montserrat Alternates', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 12px; display: block; }
+  .m1-btn .btn-tag { color: var(--neon-green); text-shadow: 0 0 8px var(--neon-green); }
+  .m2-btn .btn-tag { color: var(--neon-cyan); text-shadow: 0 0 8px var(--neon-cyan); }
+  .m3-btn .btn-tag { color: var(--neon-magenta); text-shadow: 0 0 8px var(--neon-magenta); }
 
-  .btn-icon { font-size: 42px; margin-bottom: 16px; display: block; filter: drop-shadow(0 0 16px rgba(255,255,255,0.2)); }
-  .btn-tag { font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; display: block; }
-  .smoke-btn .btn-tag { color: var(--green); }
-  .screen-btn .btn-tag { color: var(--blue); }
-
-  .btn-title { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 700; line-height: 1.2; margin-bottom: 12px; color: var(--white); }
-  .btn-desc { font-size: 14px; color: var(--muted); line-height: 1.5; }
-
-  .btn-arrow {
-    position: absolute; bottom: 32px; right: 32px; width: 40px; height: 40px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center; font-size: 18px; transition: transform 0.4s ease;
-  }
-  .smoke-btn .btn-arrow { background: var(--green-soft); color: var(--green); }
-  .screen-btn .btn-arrow { background: var(--blue-soft); color: var(--blue); }
-  .mod-btn:hover .btn-arrow { transform: rotate(-45deg); }
-  .mod-btn.active .btn-arrow { transform: rotate(90deg); }
+  .btn-title { font-family: 'Montserrat Alternates', sans-serif; font-size: 24px; font-weight: 800; line-height: 1.1; margin-bottom: 12px; color: var(--white); }
+  .btn-desc { font-size: 15px; color: var(--text-muted); line-height: 1.5; }
 
   /* CONTENT AREA */
   .content-area {
-    position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 60px 24px 100px;
+    position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 80px 24px 100px;
     display: none; opacity: 0;
   }
-  .content-area.visible { display: block; animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+  .content-area.visible { display: block; animation: neonFadeUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
 
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(40px); }
-    to { opacity: 1; transform: translateY(0); }
+  @keyframes neonFadeUp {
+    from { opacity: 0; transform: translateY(50px); filter: blur(10px); }
+    to { opacity: 1; transform: translateY(0); filter: blur(0); }
   }
 
   /* CLOSE BTN */
   .close-btn {
     display: inline-flex; align-items: center; gap: 8px; margin-bottom: 40px; padding: 12px 24px;
-    border-radius: 100px; border: 1px solid var(--glass-border); background: var(--glass-bg);
-    backdrop-filter: blur(10px); color: var(--white); font-size: 14px; font-weight: 500;
-    cursor: pointer; transition: all 0.3s ease;
+    border-radius: 100px; border: 1px solid var(--glass-border); background: var(--bg-panel);
+    backdrop-filter: blur(10px); color: var(--white); font-size: 14px; font-weight: 600;
+    cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px;
   }
-  .close-btn:hover { background: rgba(255,255,255,0.1); transform: translateX(-4px); }
+  .close-btn:hover { background: rgba(255,255,255,0.1); box-shadow: 0 0 15px rgba(255,255,255,0.2); transform: translateX(-5px); }
 
   /* CONTENT HEADER */
-  .content-header { display: flex; align-items: flex-start; gap: 28px; margin-bottom: 40px; }
-  .content-header-icon { font-size: 64px; flex-shrink: 0; filter: drop-shadow(0 0 20px rgba(255,255,255,0.1)); }
-  .content-header h2 { font-size: clamp(32px, 5vw, 48px); font-weight: 800; letter-spacing: -1px; line-height: 1.1; margin-bottom: 12px; }
-  .content-header p { color: var(--muted); font-size: 16px; max-width: 700px; }
+  .content-header { display: flex; align-items: flex-start; gap: 30px; margin-bottom: 50px; }
+  .content-header-icon { font-size: 72px; flex-shrink: 0; animation: floatIcon 4s ease-in-out infinite; }
+  @keyframes floatIcon { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+  
+  .content-header h2 { font-size: clamp(36px, 6vw, 54px); font-weight: 800; letter-spacing: -1px; line-height: 1.1; margin-bottom: 12px; }
+  .m1 .content-header h2 { color: var(--neon-green); text-shadow: 0 0 20px var(--neon-green-glow); }
+  .m2 .content-header h2 { color: var(--neon-cyan); text-shadow: 0 0 20px var(--neon-cyan-glow); }
+  .m3 .content-header h2 { color: var(--neon-magenta); text-shadow: 0 0 20px var(--neon-magenta-glow); }
+  
+  .content-header p { color: var(--text-muted); font-size: 18px; max-width: 700px; }
 
   /* SECTIONS NAV (STICKY) */
   .nav-wrapper {
-    position: sticky; top: 20px; z-index: 100; margin-bottom: 40px;
-    background: rgba(15, 17, 26, 0.8); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-    padding: 16px; border-radius: 100px; border: 1px solid var(--glass-border);
-    display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    position: sticky; top: 20px; z-index: 100; margin-bottom: 50px;
+    background: rgba(5, 5, 8, 0.85); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+    padding: 12px; border-radius: 100px; border: 1px solid rgba(255,255,255,0.05);
+    display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; box-shadow: 0 20px 40px rgba(0,0,0,0.5);
   }
   .nav-wrapper::-webkit-scrollbar { display: none; }
   
   .section-pill {
-    padding: 10px 24px; border-radius: 100px; font-size: 14px; font-weight: 600;
-    cursor: pointer; border: 1px solid transparent; color: var(--muted);
-    transition: all 0.3s ease; white-space: nowrap;
+    padding: 12px 28px; border-radius: 100px; font-size: 14px; font-weight: 700;
+    cursor: pointer; border: 1px solid transparent; color: var(--text-muted);
+    transition: all 0.3s ease; white-space: nowrap; font-family: 'Montserrat Alternates', sans-serif; text-transform: uppercase; letter-spacing: 1px;
   }
   .section-pill:hover { color: var(--white); background: rgba(255,255,255,0.05); }
-  .m1 .section-pill.active { background: var(--green-soft); border-color: rgba(0,212,170,0.3); color: var(--green); }
-  .m2 .section-pill.active { background: var(--blue-soft); border-color: rgba(79,195,247,0.3); color: var(--blue); }
+  
+  .m1 .section-pill.active { background: rgba(0,255,157,0.1); border-color: var(--neon-green); color: var(--neon-green); box-shadow: 0 0 15px var(--neon-green-glow); }
+  .m2 .section-pill.active { background: rgba(0,229,255,0.1); border-color: var(--neon-cyan); color: var(--neon-cyan); box-shadow: 0 0 15px var(--neon-cyan-glow); }
+  .m3 .section-pill.active { background: rgba(255,0,234,0.1); border-color: var(--neon-magenta); color: var(--neon-magenta); box-shadow: 0 0 15px var(--neon-magenta-glow); }
 
   /* SECTIONS BLOCKS */
   .section-block { display: none; animation: fadeIn 0.5s ease forwards; }
   .section-block.visible { display: block; }
   @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-  /* GLASS CARDS */
-  .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; margin-bottom: 40px; }
+  /* LIQUID GLASS CARDS */
+  .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; margin-bottom: 50px; }
   
   .glass-card {
-    background: var(--glass-bg); border: 1px solid var(--glass-border); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-    border-radius: 24px; padding: 32px; position: relative; overflow: hidden; transition: all 0.3s ease; height: 100%;
+    background: var(--bg-panel); border: 1px solid rgba(255,255,255,0.05); backdrop-filter: blur(16px);
+    border-radius: 30px; padding: 40px; position: relative; overflow: hidden; transition: all 0.4s ease; height: 100%;
   }
-  .glass-card:hover { transform: translateY(-4px); border-color: rgba(255,255,255,0.15); box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
+  .glass-card:hover { transform: translateY(-5px); background: rgba(20, 20, 25, 0.8); }
   
-  .m1 .glass-card:hover { border-color: rgba(0,212,170,0.3); }
-  .m2 .glass-card:hover { border-color: rgba(79,195,247,0.3); }
+  .m1 .glass-card:hover { border-color: var(--neon-green); box-shadow: 0 10px 30px var(--neon-green-glow); }
+  .m2 .glass-card:hover { border-color: var(--neon-cyan); box-shadow: 0 10px 30px var(--neon-cyan-glow); }
+  .m3 .glass-card:hover { border-color: var(--neon-magenta); box-shadow: 0 10px 30px var(--neon-magenta-glow); }
 
-  .card-icon { font-size: 32px; margin-bottom: 20px; display: inline-block; padding: 12px; background: rgba(255,255,255,0.03); border-radius: 16px; border: 1px solid var(--glass-border); }
-  .card-title { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 700; margin-bottom: 12px; color: var(--white); }
-  .card-body { font-size: 14px; color: var(--muted); }
+  .card-icon { font-size: 40px; margin-bottom: 20px; display: inline-block; filter: drop-shadow(0 0 10px rgba(255,255,255,0.3)); }
+  .card-title { font-family: 'Montserrat Alternates', sans-serif; font-size: 22px; font-weight: 800; margin-bottom: 16px; color: var(--white); }
+  .card-body { font-size: 15px; color: var(--text-muted); }
   
-  .card-body ul { list-style: none; padding: 0; margin-top: 12px; }
-  .card-body ul li { padding: 6px 0 6px 20px; position: relative; border-bottom: 1px solid rgba(255,255,255,0.03); }
+  .card-body ul { list-style: none; padding: 0; margin-top: 16px; }
+  .card-body ul li { padding: 8px 0 8px 24px; position: relative; border-bottom: 1px solid rgba(255,255,255,0.05); }
   .card-body ul li:last-child { border-bottom: none; }
-  .card-body ul li::before { content: '→'; position: absolute; left: 0; font-weight: 700; font-size: 12px; top: 8px; }
-  .m1 .card-body ul li::before { color: var(--green); }
-  .m2 .card-body ul li::before { color: var(--blue); }
-
-  /* BANNERS / HIGHLIGHTS */
-  .banner {
-    border-radius: 24px; padding: 36px 40px; margin-bottom: 32px; display: flex; gap: 24px; align-items: flex-start;
-    background: var(--glass-bg); border: 1px solid var(--glass-border); backdrop-filter: blur(16px);
-  }
-  .banner.m1-theme { border-left: 4px solid var(--green); background: linear-gradient(90deg, rgba(0,212,170,0.05), transparent); }
-  .banner.m2-theme { border-left: 4px solid var(--blue); background: linear-gradient(90deg, rgba(79,195,247,0.05), transparent); }
-  .banner.danger { border-left: 4px solid var(--red); background: linear-gradient(90deg, rgba(255,107,107,0.05), transparent); }
+  .card-body ul li::before { content: '✦'; position: absolute; left: 0; font-size: 14px; top: 10px; }
   
-  .banner-icon { font-size: 36px; flex-shrink: 0; }
-  .banner h3 { font-size: 20px; font-weight: 700; margin-bottom: 10px; }
-  .banner p { font-size: 15px; color: var(--muted); margin-bottom: 12px; }
-  .banner p:last-child { margin-bottom: 0; }
+  .m1 .card-body ul li::before { color: var(--neon-green); text-shadow: 0 0 8px var(--neon-green); }
+  .m2 .card-body ul li::before { color: var(--neon-cyan); text-shadow: 0 0 8px var(--neon-cyan); }
+  .m3 .card-body ul li::before { color: var(--neon-magenta); text-shadow: 0 0 8px var(--neon-magenta); }
+
+  /* NEON BANNERS */
+  .banner {
+    border-radius: 30px; padding: 40px; margin-bottom: 40px; display: flex; gap: 24px; align-items: flex-start;
+    background: var(--bg-panel); border: 1px solid rgba(255,255,255,0.05); backdrop-filter: blur(16px);
+    position: relative; overflow: hidden;
+  }
+  .banner::before { content:''; position:absolute; left:0; top:0; bottom:0; width:6px; box-shadow: 0 0 20px currentColor; }
+  
+  .banner.m1-theme { color: var(--neon-green); background: linear-gradient(90deg, rgba(0,255,157,0.05), transparent); }
+  .banner.m1-theme::before { background: var(--neon-green); }
+  
+  .banner.m2-theme { color: var(--neon-cyan); background: linear-gradient(90deg, rgba(0,229,255,0.05), transparent); }
+  .banner.m2-theme::before { background: var(--neon-cyan); }
+
+  .banner.m3-theme { color: var(--neon-magenta); background: linear-gradient(90deg, rgba(255,0,234,0.05), transparent); }
+  .banner.m3-theme::before { background: var(--neon-magenta); }
+
+  .banner.danger { color: var(--neon-red); background: linear-gradient(90deg, rgba(255,51,102,0.05), transparent); border-color: rgba(255,51,102,0.2); }
+  .banner.danger::before { background: var(--neon-red); }
+  
+  .banner-icon { font-size: 48px; flex-shrink: 0; filter: drop-shadow(0 0 10px currentColor); }
+  .banner-content { color: var(--white); }
+  .banner h3 { font-size: 24px; font-weight: 800; margin-bottom: 12px; color: inherit; text-shadow: 0 0 10px currentColor; }
+  .banner p { font-size: 16px; color: var(--text-muted); margin-bottom: 12px; }
+  .banner p strong { color: var(--white); }
 
   /* ACCORDION */
-  .accordion { margin-bottom: 32px; border-radius: 20px; overflow: hidden; border: 1px solid var(--glass-border); background: var(--glass-bg); }
-  .acc-item { border-bottom: 1px solid var(--glass-border); }
+  .accordion { margin-bottom: 40px; border-radius: 24px; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); background: var(--bg-panel); }
+  .acc-item { border-bottom: 1px solid rgba(255,255,255,0.05); }
   .acc-item:last-child { border-bottom: none; }
   .acc-header {
-    width: 100%; text-align: left; padding: 20px 24px; background: transparent; border: none; color: var(--white);
-    font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; cursor: pointer;
+    width: 100%; text-align: left; padding: 24px 30px; background: transparent; border: none; color: var(--white);
+    font-family: 'Montserrat Alternates', sans-serif; font-size: 18px; font-weight: 800; cursor: pointer;
     display: flex; justify-content: space-between; align-items: center; transition: background 0.3s;
   }
   .acc-header:hover { background: rgba(255,255,255,0.02); }
-  .acc-icon { transition: transform 0.3s ease; color: var(--muted); }
-  .acc-item.active .acc-icon { transform: rotate(180deg); }
-  .acc-body { padding: 0 24px; max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.4s ease; color: var(--muted); font-size: 14px; }
-  .acc-item.active .acc-body { padding: 0 24px 24px; max-height: 1000px; }
+  .acc-icon { transition: transform 0.3s ease; color: var(--text-muted); }
+  .acc-item.active .acc-icon { transform: rotate(180deg); color: var(--white); }
+  .m1 .acc-item.active .acc-icon { color: var(--neon-green); text-shadow: 0 0 10px var(--neon-green); }
+  .m2 .acc-item.active .acc-icon { color: var(--neon-cyan); text-shadow: 0 0 10px var(--neon-cyan); }
+  .m3 .acc-item.active .acc-icon { color: var(--neon-magenta); text-shadow: 0 0 10px var(--neon-magenta); }
+
+  .acc-body { padding: 0 30px; max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.4s ease; color: var(--text-muted); font-size: 15px; }
+  .acc-item.active .acc-body { padding: 0 30px 30px; max-height: 2000px; }
   .acc-body ul { padding-left: 20px; margin-top: 10px; }
-  .acc-body li { margin-bottom: 8px; }
+  .acc-body li { margin-bottom: 10px; }
 
-  /* TOXINS GRID */
-  .toxin-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; margin: 24px 0 40px; }
-  .toxin-card {
-    background: rgba(255,107,107,0.03); border: 1px solid rgba(255,107,107,0.2); border-radius: 16px; padding: 24px;
-    text-align: center; transition: all 0.3s ease;
-  }
-  .toxin-card:hover { transform: translateY(-4px); background: rgba(255,107,107,0.08); border-color: var(--red); box-shadow: 0 10px 20px rgba(255,107,107,0.1); }
-  .toxin-icon { font-size: 40px; margin-bottom: 12px; }
-  .toxin-name { font-family: 'Syne', sans-serif; font-weight: 800; color: var(--red); margin-bottom: 8px; font-size: 16px;}
-  .toxin-desc { font-size: 13px; color: var(--muted); line-height: 1.5; }
+  /* VIDEO GRID */
+  .video-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 20px; }
+  .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 20px; border: 1px solid var(--neon-magenta); box-shadow: 0 0 20px var(--neon-magenta-glow); }
+  .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
 
-  /* SPECTRUM CARDS (MOD 2) */
-  .spectrum-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin: 32px 0; }
-  .spectrum-card { border-radius: 24px; padding: 32px; position: relative; overflow: hidden; background: var(--glass-bg); border: 1px solid var(--glass-border); backdrop-filter: blur(10px); }
-  .spectrum-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; }
-  .spectrum-card.uso::before { background: var(--green); }
-  .spectrum-card.abuso::before { background: var(--gold); }
-  .spectrum-card.adiccion::before { background: var(--red); }
-  .spectrum-card.uso:hover { border-color: rgba(0,212,170,0.3); box-shadow: 0 10px 30px rgba(0,212,170,0.05); }
-  .spectrum-card.abuso:hover { border-color: rgba(255,209,102,0.3); box-shadow: 0 10px 30px rgba(255,209,102,0.05); }
-  .spectrum-card.adiccion:hover { border-color: rgba(255,107,107,0.3); box-shadow: 0 10px 30px rgba(255,107,107,0.05); }
+  /* QUIZ SECTION (NEON STYLE) */
+  .quiz-wrap { background: var(--bg-panel); border: 1px solid rgba(255,255,255,0.1); border-radius: 40px; padding: 50px; margin-bottom: 40px; backdrop-filter: blur(16px); position: relative; overflow: hidden; }
+  .quiz-wrap::before { content:''; position:absolute; inset:0; border-radius:40px; padding:2px; background:linear-gradient(135deg, rgba(255,255,255,0.2), transparent); -webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events:none; }
   
-  .spec-title { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; margin-bottom: 16px; display: flex; align-items: center; gap: 10px;}
-  .uso .spec-title { color: var(--green); }
-  .abuso .spec-title { color: var(--gold); }
-  .adiccion .spec-title { color: var(--red); }
-  .spec-body { font-size: 14px; color: var(--muted); }
-  .spec-body ul { padding-left: 20px; margin-top: 12px; }
-  .spec-body li { margin-bottom: 8px; }
-
-  /* HOTSPOT SECTION */
-  .hotspot-wrap {
-    background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 32px;
-    padding: 48px; margin-bottom: 40px; backdrop-filter: blur(16px);
-  }
-  .hotspot-header { text-align: center; margin-bottom: 40px; }
-  .hotspot-header h3 { font-size: 28px; font-weight: 800; margin-bottom: 12px; }
-  .hotspot-header p { color: var(--muted); font-size: 15px; }
-
-  .body-diagram { position: relative; width: 100%; max-width: 500px; margin: 0 auto; user-select: none; }
-  .body-diagram svg { width: 100%; height: auto; display: block; filter: drop-shadow(0 0 30px rgba(0,212,170,0.1)); }
-  
-  .hotspot-point { position: absolute; cursor: pointer; z-index: 10; }
-  .hotspot-dot {
-    width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-    font-size: 13px; font-weight: 800; font-family: 'Syne', sans-serif; transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-  }
-  .hotspot-dot::after {
-    content: ''; position: absolute; inset: -6px; border-radius: 50%; animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
-  }
-  .m1 .hotspot-dot { background: var(--green); color: var(--smoke); }
-  .m1 .hotspot-dot::after { border: 2px solid var(--green); }
-  .m2 .hotspot-dot { background: var(--blue); color: var(--smoke); }
-  .m2 .hotspot-dot::after { border: 2px solid var(--blue); }
-
-  @keyframes pulse-ring { 0% { transform: scale(0.8); opacity: 1; } 100% { transform: scale(2.5); opacity: 0; } }
-  .hotspot-point:hover .hotspot-dot, .hotspot-point.active .hotspot-dot { transform: scale(1.2); }
-
-  .hotspot-tooltip {
-    position: absolute; background: rgba(15, 17, 26, 0.95); border: 1px solid var(--glass-border);
-    backdrop-filter: blur(10px); border-radius: 16px; padding: 20px; width: 240px; font-size: 13px;
-    color: var(--muted); z-index: 20; pointer-events: none; opacity: 0; transform: translateY(10px) scale(0.95);
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    left: 48px; top: -30px; box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-  }
-  .hotspot-tooltip.left { left: auto; right: 48px; }
-  .hotspot-tooltip strong { display: block; margin-bottom: 6px; font-family: 'Syne', sans-serif; font-size: 15px; color: var(--white); }
-  .m1 .hotspot-tooltip strong { color: var(--green); }
-  .m2 .hotspot-tooltip strong { color: var(--blue); }
-
-  .hotspot-point:hover .hotspot-tooltip, .hotspot-point.active .hotspot-tooltip { opacity: 1; transform: translateY(0) scale(1); }
-
-  /* 2x2x2 RULE GRID */
-  .rule-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin: 32px 0; }
-  .rule-item {
-    background: rgba(79,195,247,0.03); border: 1px solid rgba(79,195,247,0.15);
-    border-radius: 20px; padding: 32px 20px; text-align: center; transition: transform 0.3s;
-  }
-  .rule-item:hover { transform: translateY(-4px); background: rgba(79,195,247,0.06); }
-  .rule-num { font-family: 'Syne', sans-serif; font-size: 56px; font-weight: 800; color: var(--blue); line-height: 1; margin-bottom: 12px; text-shadow: 0 0 20px rgba(79,195,247,0.3); }
-  .rule-text { font-size: 14px; color: var(--muted); line-height: 1.5; }
-
-  /* ALERT GRID */
-  .alert-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; margin-bottom: 40px; }
-  .alert-item {
-    display: flex; gap: 16px; align-items: flex-start; background: rgba(255,107,107,0.03);
-    border: 1px solid rgba(255,107,107,0.15); border-radius: 16px; padding: 20px;
-    font-size: 14px; color: var(--muted); transition: background 0.3s;
-  }
-  .alert-item:hover { background: rgba(255,107,107,0.08); }
-  .alert-item .ai { font-size: 24px; flex-shrink: 0; }
-
-  /* COMMITMENT */
-  .commitment {
-    border-radius: 32px; padding: 48px; text-align: center; position: relative; overflow: hidden; margin-top: 24px;
-    border: 1px solid var(--glass-border); backdrop-filter: blur(10px);
-  }
-  .m1 .commitment { background: linear-gradient(135deg, rgba(0,212,170,0.1), rgba(0,212,170,0.02)); }
-  .m2 .commitment { background: linear-gradient(135deg, rgba(79,195,247,0.1), rgba(79,195,247,0.02)); }
-  .commitment h3 { font-size: 28px; font-weight: 800; margin-bottom: 16px; }
-  .commitment p { font-size: 16px; color: var(--muted); max-width: 600px; margin: 0 auto 32px; }
-  .commitment-items { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
-  .ci { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; border-radius: 100px; font-size: 14px; font-weight: 600; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
-  .m1 .ci { background: rgba(0,212,170,0.15); border: 1px solid rgba(0,212,170,0.3); color: var(--green); }
-  .m2 .ci { background: rgba(79,195,247,0.15); border: 1px solid rgba(79,195,247,0.3); color: var(--blue); }
-
-  /* QUIZ SECTION */
-  .quiz-wrap { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 32px; padding: 48px; margin-bottom: 40px; backdrop-filter: blur(16px); }
-  .quiz-question { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 700; margin-bottom: 24px; color: var(--white); }
-  .quiz-options { display: flex; flex-direction: column; gap: 12px; }
+  .quiz-question { font-family: 'Montserrat Alternates', sans-serif; font-size: 24px; font-weight: 800; margin-bottom: 30px; color: var(--white); }
+  .quiz-options { display: flex; flex-direction: column; gap: 16px; }
   .quiz-opt {
-    padding: 16px 24px; border-radius: 16px; border: 1px solid var(--glass-border); background: rgba(255,255,255,0.03);
-    cursor: pointer; font-size: 15px; color: var(--muted); transition: all 0.3s; text-align: left; font-family: inherit;
+    padding: 20px 30px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.02);
+    cursor: pointer; font-size: 16px; color: var(--text-muted); transition: all 0.3s; text-align: left; font-family: inherit;
   }
-  .quiz-opt:hover { color: var(--white); background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.2); transform: translateX(4px); }
-  .quiz-opt.correct { background: rgba(0,212,170,0.1); border-color: var(--green); color: var(--green); transform: translateX(0); }
-  .quiz-opt.wrong { background: rgba(255,107,107,0.1); border-color: var(--red); color: var(--red); transform: translateX(0); }
+  .quiz-opt:hover { color: var(--white); background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.3); transform: translateX(5px); }
+  
+  .m1 .quiz-opt.correct { background: rgba(0,255,157,0.1); border-color: var(--neon-green); color: var(--neon-green); box-shadow: 0 0 15px var(--neon-green-glow); transform: translateX(0); }
+  .m2 .quiz-opt.correct { background: rgba(0,229,255,0.1); border-color: var(--neon-cyan); color: var(--neon-cyan); box-shadow: 0 0 15px var(--neon-cyan-glow); transform: translateX(0); }
+  .m3 .quiz-opt.correct { background: rgba(255,0,234,0.1); border-color: var(--neon-magenta); color: var(--neon-magenta); box-shadow: 0 0 15px var(--neon-magenta-glow); transform: translateX(0); }
+  
+  .quiz-opt.wrong { background: rgba(255,51,102,0.1); border-color: var(--neon-red); color: var(--neon-red); box-shadow: 0 0 15px rgba(255,51,102,0.3); transform: translateX(0); }
 
-  .quiz-feedback { margin-top: 20px; padding: 16px 20px; border-radius: 16px; font-size: 14px; display: none; line-height: 1.5; animation: fadeIn 0.4s; }
+  .quiz-feedback { margin-top: 24px; padding: 20px 24px; border-radius: 20px; font-size: 15px; display: none; line-height: 1.6; animation: fadeIn 0.4s; }
   .quiz-feedback.show { display: block; }
-  .quiz-feedback.ok { background: rgba(0,212,170,0.08); border: 1px solid rgba(0,212,170,0.3); color: var(--green); }
-  .quiz-feedback.fail { background: rgba(255,107,107,0.08); border: 1px solid rgba(255,107,107,0.3); color: var(--red); }
+  
+  .m1 .quiz-feedback.ok { background: rgba(0,255,157,0.05); border: 1px solid var(--neon-green); color: var(--neon-green); text-shadow: 0 0 5px var(--neon-green-glow); }
+  .m2 .quiz-feedback.ok { background: rgba(0,229,255,0.05); border: 1px solid var(--neon-cyan); color: var(--neon-cyan); text-shadow: 0 0 5px var(--neon-cyan-glow); }
+  .m3 .quiz-feedback.ok { background: rgba(255,0,234,0.05); border: 1px solid var(--neon-magenta); color: var(--neon-magenta); text-shadow: 0 0 5px var(--neon-magenta-glow); }
+  
+  .quiz-feedback.fail { background: rgba(255,51,102,0.05); border: 1px solid var(--neon-red); color: var(--neon-red); text-shadow: 0 0 5px rgba(255,51,102,0.5); }
 
-  .quiz-nav { display: flex; gap: 16px; margin-top: 24px; align-items: center; justify-content: space-between; }
-  .quiz-progress { font-size: 13px; color: var(--muted); font-family: 'Syne', sans-serif; font-weight: 700; letter-spacing: 1px; }
+  .quiz-nav { display: flex; gap: 20px; margin-top: 30px; align-items: center; justify-content: space-between; }
+  .quiz-progress { font-size: 14px; color: var(--text-muted); font-family: 'Montserrat Alternates', sans-serif; font-weight: 800; letter-spacing: 2px; }
   .btn-quiz {
-    padding: 12px 32px; border-radius: 100px; border: none; cursor: pointer; font-family: 'Syne', sans-serif;
-    font-size: 14px; font-weight: 700; transition: all 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    padding: 16px 36px; border-radius: 100px; border: none; cursor: pointer; font-family: 'Montserrat Alternates', sans-serif;
+    font-size: 15px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s;
+    color: var(--bg-dark);
   }
-  .m1 .btn-quiz { background: var(--green); color: var(--smoke); }
-  .m1 .btn-quiz:hover { background: #00f0c0; transform: translateY(-2px); }
-  .m2 .btn-quiz { background: var(--blue); color: var(--smoke); }
-  .m2 .btn-quiz:hover { background: #7dd8ff; transform: translateY(-2px); }
+  .m1 .btn-quiz { background: var(--neon-green); box-shadow: 0 0 20px var(--neon-green-glow); }
+  .m1 .btn-quiz:hover { box-shadow: 0 0 30px var(--neon-green); transform: translateY(-2px); }
+  .m2 .btn-quiz { background: var(--neon-cyan); box-shadow: 0 0 20px var(--neon-cyan-glow); }
+  .m2 .btn-quiz:hover { box-shadow: 0 0 30px var(--neon-cyan); transform: translateY(-2px); }
+  .m3 .btn-quiz { background: var(--neon-magenta); box-shadow: 0 0 20px var(--neon-magenta-glow); color: #fff;}
+  .m3 .btn-quiz:hover { box-shadow: 0 0 30px var(--neon-magenta); transform: translateY(-2px); }
 
   /* RESPONSIVE */
   @media (max-width: 768px) {
-    .rule-grid { grid-template-columns: 1fr; }
-    .content-header { flex-direction: column; gap: 16px; }
-    .content-header-icon { font-size: 48px; }
-    .hero { padding: 60px 20px 40px; }
-    .hero h1 { font-size: 36px; }
-    .mod-btn { width: 100%; padding: 24px; }
+    .content-header { flex-direction: column; gap: 20px; }
+    .hero h1 { font-size: 42px; }
+    .mod-btn { width: 100%; padding: 30px; }
     .content-area { padding: 40px 16px 80px; }
-    .hotspot-wrap, .quiz-wrap, .commitment, .glass-card { padding: 24px; }
-    .nav-wrapper { padding: 12px; }
+    .glass-card, .banner, .quiz-wrap { padding: 24px; }
+    .nav-wrapper { padding: 10px; }
   }
-
-  /* SCREEN DIAGRAM (MOD 2) */
-  .screen-diagram { display: flex; justify-content: center; align-items: flex-start; gap: 40px; flex-wrap: wrap; margin-top: 40px; }
-  .screen-figure { position: relative; width: 240px; filter: drop-shadow(0 0 30px rgba(79,195,247,0.08)); }
-  .screen-device { background: linear-gradient(180deg, #1a2a3a, #0d1a26); border: 2px solid rgba(79,195,247,0.3); border-radius: 20px; padding: 16px; position: relative; }
-  .screen-face { background: linear-gradient(135deg, #0a1520, #0d2035); border-radius: 10px; height: 130px; display: flex; align-items: center; justify-content: center; font-size: 48px; border: 1px solid rgba(79,195,247,0.15); }
-  .screen-label { text-align: center; font-size: 13px; color: var(--muted); margin-top: 16px; font-family: 'Syne', sans-serif; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
 </style>
 </head>
 <body>
 
-<!-- BACKGROUND MESH -->
-<div class="bg-mesh"><div class="bg-mesh-3"></div></div>
+<!-- LIQUID BACKGROUND -->
+<div class="liquid-bg">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+</div>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-badge"><span></span> Material Académico · Bienestar Escolar</div>
+  <div class="hero-badge"><span></span> Plataforma de Bienestar</div>
   <h1>Hábitos de<br><span>Vida Saludable</span></h1>
-  <p>Explora módulos interactivos basados en lineamientos oficiales sobre la prevención del tabaco/vapeo y el uso responsable de pantallas electrónicas.</p>
+  <p>Explora módulos interactivos sobre prevención y salud integral. Protege tu mente y tu cuerpo para un futuro brillante.</p>
 </section>
 
 <!-- MODULE BUTTONS -->
 <div class="module-buttons">
-  <button class="mod-btn smoke-btn" onclick="showModule('m1', this)">
+  <!-- M1 -->
+  <button class="mod-btn m1-btn" onclick="showModule('m1', this)">
     <span class="btn-icon">🚭</span>
     <span class="btn-tag">Módulo 1</span>
-    <div class="btn-title">Espacios Libres de Humo y Aerosoles</div>
-    <div class="btn-desc">Conoce la realidad médica sobre cigarrillos, vapeadores y la importancia de proteger tu entorno.</div>
-    <span class="btn-arrow">↓</span>
+    <div class="btn-title">Humo y Aerosoles</div>
+    <div class="btn-desc">Prevención del tabaco y vapeo. Conoce la realidad médica.</div>
   </button>
-  <button class="mod-btn screen-btn" onclick="showModule('m2', this)">
+  <!-- M2 -->
+  <button class="mod-btn m2-btn" onclick="showModule('m2', this)">
     <span class="btn-icon">📱</span>
     <span class="btn-tag">Módulo 2</span>
-    <div class="btn-title">Uso Responsable de Pantallas</div>
-    <div class="btn-desc">Aprende a diferenciar el uso del abuso y descubre estrategias para cuidar tu salud integral.</div>
-    <span class="btn-arrow">↓</span>
+    <div class="btn-title">Uso de Pantallas</div>
+    <div class="btn-desc">Estrategias para equilibrar tu tiempo digital y evitar la adicción.</div>
+  </button>
+  <!-- M3 (NUEVO) -->
+  <button class="mod-btn m3-btn" onclick="showModule('m3', this)">
+    <span class="btn-icon">⚡</span>
+    <span class="btn-tag">Módulo 3</span>
+    <div class="btn-title">Alcohol y Energizantes</div>
+    <div class="btn-desc">Control de consumo, prevención de riesgos y mitos desmentidos.</div>
   </button>
 </div>
 
-<!-- ===== MÓDULO 1 ===== -->
+<!-- ===== MÓDULO 1 (Resumen Adaptado a Neón) ===== -->
 <div class="content-area m1" id="m1">
-  <button class="close-btn" onclick="closeModule('m1')">← Volver a los Módulos</button>
+  <button class="close-btn" onclick="closeModule('m1')">← Volver</button>
   
   <div class="content-header">
     <div class="content-header-icon">🚭</div>
     <div>
       <h2>Humo y Aerosoles</h2>
-      <p>Información esencial extraída de lineamientos de la OMS, CDC y Secretaría de Salud para estudiantes, padres y comunidad.</p>
+      <p>Información esencial para mantener tus pulmones limpios y liderar con el ejemplo.</p>
     </div>
   </div>
 
-  <!-- SECTIONS NAV (STICKY) -->
   <div class="nav-wrapper" id="nav-m1">
     <span class="section-pill active" onclick="showSection('m1','s1-0', this)">Introducción</span>
-    <span class="section-pill" onclick="showSection('m1','s1-1', this)">La Realidad (Cigarrillo vs Vapeo)</span>
-    <span class="section-pill" onclick="showSection('m1','s1-2', this)">Daños a la Salud 🔍</span>
-    <span class="section-pill" onclick="showSection('m1','s1-3', this)">Prevención y Familia</span>
-    <span class="section-pill" onclick="showSection('m1','s1-5', this)">Autoevaluación</span>
+    <span class="section-pill" onclick="showSection('m1','s1-1', this)">Autoevaluación</span>
   </div>
 
-  <!-- SECTION 0: INTRO -->
   <div class="section-block visible" id="s1-0">
     <div class="banner m1-theme">
       <div class="banner-icon">💡</div>
-      <div>
+      <div class="banner-content">
         <h3>¿Por qué hablamos de esto?</h3>
-        <p>Los espacios libres de humo y aerosoles son fundamentales para proteger la salud de todas las personas, especialmente de los niños y jóvenes. El consumo no solo afecta a quienes lo practican, sino también a quienes están expuestos al humo o vapor de segunda mano.</p>
-        <p>Lo que eliges hoy afecta tu salud y tu futuro. Informarte te ayuda a tomar mejores decisiones. <strong>Decidir no fumar ni vapear es un acto de liderazgo.</strong></p>
+        <p>Los espacios libres de humo protegen tu salud. <strong>Decidir no fumar ni vapear es un acto de liderazgo.</strong> Los vapeadores no son inofensivos; contienen metales pesados, saborizantes tóxicos y son una trampa de nicotina.</p>
       </div>
     </div>
-    
     <div class="cards-grid">
       <div class="glass-card">
         <div class="card-icon">🛡️</div>
-        <div class="card-title">Es cuidarte</div>
-        <div class="card-body">Proteger tu salud hoy significa tener más energía, mejor rendimiento académico y una vida más larga y plena.</div>
-      </div>
-      <div class="glass-card">
-        <div class="card-icon">🔭</div>
-        <div class="card-title">Pensar a largo plazo</div>
-        <div class="card-body">Las decisiones que tomas ahora tienen consecuencias en tu futuro. La dependencia y las enfermedades crónicas pueden gestarse desde joven.</div>
-      </div>
-      <div class="glass-card">
-        <div class="card-icon">🌟</div>
-        <div class="card-title">Dar buen ejemplo</div>
-        <div class="card-body">Tu actitud influye en las personas que te rodean. Ser un referente positivo es una forma de liderazgo real frente a presiones sociales.</div>
+        <div class="card-title">Cuidarte es Prioridad</div>
+        <div class="card-body">Proteger tu salud hoy significa tener más energía, mejor rendimiento académico y una vida más plena.</div>
       </div>
     </div>
   </div>
 
-  <!-- SECTION 1: CIGARRILLO Y VAPEADORES -->
   <div class="section-block" id="s1-1">
-    <div class="banner m1-theme">
-      <div class="banner-icon">🚬</div>
-      <div>
-        <h3>¿Qué es el cigarrillo tradicional?</h3>
-        <p>Contiene nicotina (sustancia altamente adictiva) y <strong>tiene más de 7.000 químicos dañinos</strong>. Afecta todos los órganos del cuerpo, no relaja y definitivamente no es inofensivo. La adicción puede comenzar desde la primera vez que se consume.</p>
-      </div>
-    </div>
-
-    <div class="banner m1-theme" style="margin-top: 24px;">
-      <div class="banner-icon">💨</div>
-      <div>
-        <h3>Sistemas Electrónicos (Vapeadores)</h3>
-        <p>Los Sistemas Electrónicos de Administración de Nicotina (SEAN) y sin Nicotina (SSSN) se componen de un mecanismo electrónico, una batería y cartuchos. <strong>No son seguros:</strong> producen un aerosol con partículas ultrafinas, saborizantes disueltos en propilenglicol y glicerina, liberando metales y tóxicos que dañan severamente el cuerpo.</p>
-      </div>
-    </div>
-
-    <h3 class="font-syne" style="font-size:22px; font-weight:800; margin: 48px 0 24px;">¿Qué hay en el aerosol? (Tóxicos comprobados)</h3>
-    <div class="toxin-grid">
-      <div class="toxin-card">
-        <div class="toxin-icon">🔥</div>
-        <div class="toxin-name">Dimetil Éter</div>
-        <div class="toxin-desc">Sustancia altamente inflamable detectada en el aerosol exhalado.</div>
-      </div>
-      <div class="toxin-card">
-        <div class="toxin-icon">🪳</div>
-        <div class="toxin-name">Linalol</div>
-        <div class="toxin-desc">Químico utilizado comúnmente como insecticida contra moscas y cucarachas.</div>
-      </div>
-      <div class="toxin-card">
-        <div class="toxin-icon">🧼</div>
-        <div class="toxin-name">Alcohol Bencílico</div>
-        <div class="toxin-desc">Utilizado en muchos tipos de jabones, cremas y productos de limpieza industrial.</div>
-      </div>
-      <div class="toxin-card">
-        <div class="toxin-icon">🍿</div>
-        <div class="toxin-name">Diacetil y Acroleína</div>
-        <div class="toxin-desc">Saborizantes y químicos reconocidos por causar daños pulmonares irreversibles y cáncer.</div>
-      </div>
-    </div>
-
-    <div class="banner danger">
-      <div class="banner-icon">🚫</div>
-      <div>
-        <h3>Mito: "Sirven para dejar de fumar"</h3>
-        <p><strong>FALSO.</strong> Una estrategia de las industrias es hacer creer engañosamente que son alternativas para la "cesación". Su eficacia NO ha sido comprobada por ciencia independiente ni avalada por la OMS. De hecho, los jóvenes que inician con vapeadores <strong>aumentan de 2 a 4 veces sus probabilidades de fumar cigarrillos combustibles</strong>, siendo una puerta de entrada a la adicción.</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- SECTION 2: DAÑOS A LA SALUD -->
-  <div class="section-block" id="s1-2">
-    <div class="hotspot-wrap">
-      <div class="hotspot-header">
-        <h3>Daños en el Cuerpo Humano</h3>
-        <p>Interactúa con los puntos para ver los efectos médicos del humo y los aerosoles.</p>
-      </div>
-      <div class="body-diagram">
-        <!-- Human silhouette SVG -->
-        <svg viewBox="0 0 300 520" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="150" cy="58" r="44" fill="rgba(255,255,255,0.02)" stroke="var(--green)" stroke-width="1.5" stroke-opacity="0.3"/>
-          <rect x="136" y="98" width="28" height="30" rx="4" fill="rgba(255,255,255,0.02)" stroke="var(--green)" stroke-width="1.5" stroke-opacity="0.3"/>
-          <rect x="90" y="124" width="120" height="150" rx="14" fill="rgba(255,255,255,0.02)" stroke="var(--green)" stroke-width="1.5" stroke-opacity="0.3"/>
-          <rect x="50" y="124" width="36" height="130" rx="18" fill="rgba(255,255,255,0.02)" stroke="var(--green)" stroke-width="1.5" stroke-opacity="0.3"/>
-          <rect x="214" y="124" width="36" height="130" rx="18" fill="rgba(255,255,255,0.02)" stroke="var(--green)" stroke-width="1.5" stroke-opacity="0.3"/>
-          <rect x="97" y="270" width="48" height="180" rx="24" fill="rgba(255,255,255,0.02)" stroke="var(--green)" stroke-width="1.5" stroke-opacity="0.3"/>
-          <rect x="155" y="270" width="48" height="180" rx="24" fill="rgba(255,255,255,0.02)" stroke="var(--green)" stroke-width="1.5" stroke-opacity="0.3"/>
-          <circle cx="135" cy="52" r="4" fill="var(--green)" opacity="0.6"/>
-          <circle cx="165" cy="52" r="4" fill="var(--green)" opacity="0.6"/>
-        </svg>
-        
-        <div class="hotspot-point" style="top:6%;left:60%;">
-          <div class="hotspot-dot">1</div>
-          <div class="hotspot-tooltip left">
-            <strong>Cerebro y Concentración</strong>
-            En jóvenes, la nicotina afecta adversamente el desarrollo cerebral, generando dificultades en la memoria, la atención y el aprendizaje.
-          </div>
-        </div>
-        <div class="hotspot-point" style="top:12%;left:62%;">
-          <div class="hotspot-dot">2</div>
-          <div class="hotspot-tooltip left">
-            <strong>Garganta y Boca</strong>
-            Irritación inmediata, tos, mal aliento y aumento significativo en el riesgo de cáncer oral.
-          </div>
-        </div>
-        <div class="hotspot-point" style="top:28%;left:65%;">
-          <div class="hotspot-dot">3</div>
-          <div class="hotspot-tooltip">
-            <strong>Daño Pulmonar (Respiratorio)</strong>
-            Asma, bronquitis crónica, inflamación del tejido pulmonar, opacidades bilaterales y baja oxigenación por el vapor a altas temperaturas.
-          </div>
-        </div>
-        <div class="hotspot-point" style="top:31%;left:22%;">
-          <div class="hotspot-dot">4</div>
-          <div class="hotspot-tooltip left">
-            <strong>Corazón (Cardiovascular)</strong>
-            Aumenta el ritmo cardíaco y la presión arterial. Contrae los vasos sanguíneos y puede casi duplicar el riesgo de ataque cardíaco. Exacerba la disfunción endotelial.
-          </div>
-        </div>
-        <div class="hotspot-point" style="top:48%;left:60%;">
-          <div class="hotspot-dot">5</div>
-          <div class="hotspot-tooltip">
-            <strong>Embarazo y Desarrollo</strong>
-            En mujeres embarazadas, fumar o exponerse al humo puede causar bajo peso al nacer, parto prematuro y problemas graves en el desarrollo del bebé.
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <h3 class="font-syne" style="font-size:22px; font-weight:800; margin: 40px 0 24px;">Clasificación Médica de Daños</h3>
-    <div class="cards-grid">
-      <div class="glass-card">
-        <div class="card-icon">⚕️</div>
-        <div class="card-title">Daños Respiratorios y Físicos</div>
-        <div class="card-body">
-          <ul>
-            <li>Tos, fatiga crónica y dolor en el pecho.</li>
-            <li>Inflamación severa de vías respiratorias.</li>
-            <li>Riesgo de desarrollar enfermedades pulmonares graves no vistas hasta ahora en fumadores comunes.</li>
-            <li>Bajo rendimiento físico y académico.</li>
-          </ul>
-        </div>
-      </div>
-      <div class="glass-card">
-        <div class="card-icon">🩸</div>
-        <div class="card-title">Daños Cardiovasculares</div>
-        <div class="card-body">
-          <ul>
-            <li>Cambios adversos en la circulación sanguínea.</li>
-            <li>Aumento de probabilidades de sufrir infarto de miocardio y accidente cerebrovascular.</li>
-            <li>Infecciones recurrentes.</li>
-          </ul>
-        </div>
-      </div>
-      <div class="glass-card">
-        <div class="card-icon">🧬</div>
-        <div class="card-title">Daños Mutagénicos</div>
-        <div class="card-body">
-          <ul>
-            <li>Exposición a compuestos como las nitrosaminas y formaldehído aumentan el riesgo de múltiples tipos de cáncer.</li>
-            <li>Alteraciones a la estructura genética y nivel reproductivo.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- SECTION 3: PREVENCION Y FAMILIA -->
-  <div class="section-block" id="s1-3">
-    <div class="banner m1-theme">
-      <div class="banner-icon">👨‍👩‍👧</div>
-      <div>
-        <h3>El rol de los padres y la familia</h3>
-        <p>Los padres juegan un papel crucial en la prevención. Los hijos aprenden con el ejemplo. Un hogar libre de humo protege la salud física y emocional (hijos más sanos, ambientes seguros, mejor calidad de vida) y previene la exposición pasiva que causa infecciones y problemas cardíacos en no fumadores.</p>
-      </div>
-    </div>
-
-    <h3 class="font-syne" style="font-size:22px; font-weight:800; margin: 40px 0 24px;">Estrategias y Leyes de Prevención</h3>
-    
-    <!-- ACCORDIONS PARA ESTRATEGIAS (Evita muros de texto) -->
-    <div class="accordion">
-      <div class="acc-item">
-        <button class="acc-header" onclick="toggleAccordion(this)">
-          Estrategias recomendadas (OMS y CDC) <span class="acc-icon">▼</span>
-        </button>
-        <div class="acc-body">
-          <p>Las organizaciones internacionales recomiendan para prevenir el consumo, especialmente en jóvenes:</p>
-          <ul>
-            <li>Hablar abiertamente con los hijos sobre los riesgos, adaptando el mensaje a su edad.</li>
-            <li>Establecer reglas claras en el hogar sobre no fumar ni vapear.</li>
-            <li>Ser un buen ejemplo evitando el consumo de tabaco y vapeo.</li>
-            <li>Fomentar actividades saludables y alternativas para manejar el estrés.</li>
-            <li>Participar en programas escolares y comunitarios de prevención.</li>
-            <li>Limitar la exposición a publicidad y entornos que promuevan el consumo.</li>
-          </ul>
-        </div>
-      </div>
-      <div class="acc-item">
-        <button class="acc-header" onclick="toggleAccordion(this)">
-          Estrategias directas para la familia <span class="acc-icon">▼</span>
-        </button>
-        <div class="acc-body">
-          <ul>
-            <li>Mantener un hogar 100% libre de humo y aerosoles.</li>
-            <li>Dialogar con los hijos sobre los riesgos y las consecuencias del consumo (incluyendo los engaños de la industria).</li>
-            <li>Promover hábitos saludables y actividades recreativas.</li>
-            <li>Informarse y utilizar recursos educativos y de apoyo.</li>
-          </ul>
-        </div>
-      </div>
-      <div class="acc-item">
-        <button class="acc-header" onclick="toggleAccordion(this)">
-          Derecho a la Salud y Orden Público <span class="acc-icon">▼</span>
-        </button>
-        <div class="acc-body">
-          <p>La prohibición de la importación y venta de estos productos responde a:</p>
-          <ul>
-            <li><strong>Artículo 4° Constitucional:</strong> Toda persona tiene derecho a la protección de la salud y a un medio ambiente sano.</li>
-            <li><strong>Interés Superior:</strong> Proteger a los individuos de sustancias tóxicas (incluso las no presentes en cigarrillos comunes) y salvaguardar a terceros de las emisiones.</li>
-            <li><strong>Prevención estatal:</strong> Evitar que aumenten las enfermedades atribuibles al tabaquismo que impactarán la capacidad futura del Estado para atender problemas de salud.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div class="commitment m1">
-      <h3>🤝 Compromiso Familiar: "El Ejemplo Cuenta"</h3>
-      <p>Reflexionemos: ¿Qué hábitos saludables promovemos en casa? ¿Cómo influye nuestro ejemplo en nuestros hijos? ¿Qué cambios podemos hacer desde hoy?</p>
-      <div class="commitment-items">
-        <span class="ci">Hogar 100% libre de humo y aerosoles</span>
-        <span class="ci">Dialogar abierta y honestamente</span>
-        <span class="ci">Promover actividades saludables juntos</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- SECTION 4: QUIZ M1 -->
-  <div class="section-block" id="s1-5">
     <div class="quiz-wrap">
-      <div id="quiz1-container">
-        <div class="quiz-question" id="q1-text"></div>
-        <div class="quiz-options" id="q1-opts"></div>
-        <div class="quiz-feedback" id="q1-feedback"></div>
-        <div class="quiz-nav">
-          <span class="quiz-progress" id="q1-progress"></span>
-          <button class="btn-quiz" id="q1-next" onclick="nextQ1()" style="display:none">Siguiente Pregunta →</button>
-        </div>
+      <div class="quiz-question">¿El vapeador sirve para dejar de fumar?</div>
+      <div class="quiz-options">
+        <div class="quiz-opt wrong">Sí, es 100% recomendado.</div>
+        <div class="quiz-opt correct">Falso. Aumenta drásticamente la probabilidad de fumar.</div>
       </div>
-      <div id="quiz1-result" style="display:none; text-align:center;">
-        <div style="font-size:64px; margin-bottom:20px; animation: pulse-ring 2s infinite;" id="quiz1-emoji"></div>
-        <div style="font-family:'Syne',sans-serif; font-size:28px; font-weight:800; margin-bottom:12px; color:var(--white);" id="quiz1-score"></div>
-        <div style="color:var(--muted); font-size:16px; margin-bottom:32px; max-width: 400px; margin-inline: auto;" id="quiz1-msg"></div>
-        <button class="btn-quiz" onclick="resetQ1()">Intentar de nuevo</button>
+      <div class="quiz-feedback show ok" style="margin-top:20px;">
+        <strong>¡Correcto!</strong> Es una puerta de entrada a la adicción.
       </div>
     </div>
   </div>
 </div>
 
-<!-- ===== MÓDULO 2 ===== -->
+<!-- ===== MÓDULO 2 (Resumen Adaptado a Neón) ===== -->
 <div class="content-area m2" id="m2">
-  <button class="close-btn" onclick="closeModule('m2')">← Volver a los Módulos</button>
+  <button class="close-btn" onclick="closeModule('m2')">← Volver</button>
   
   <div class="content-header">
     <div class="content-header-icon">📱</div>
     <div>
       <h2>Uso Responsable de Pantallas</h2>
-      <p>Aprende a equilibrar tu tiempo digital, identificar riesgos físicos, emocionales y sociales, y aplicar la Regla 2x2x2 para proteger tu salud integral.</p>
+      <p>Aprende a equilibrar tu tiempo digital y aplicar la Regla 2x2x2.</p>
     </div>
   </div>
 
   <div class="nav-wrapper" id="nav-m2">
-    <span class="section-pill active" onclick="showSection('m2','s2-0', this)">Introducción y Espectro</span>
-    <span class="section-pill" onclick="showSection('m2','s2-1', this)">Riesgos a la Salud 🔍</span>
-    <span class="section-pill" onclick="showSection('m2','s2-2', this)">Estrategias y Regla 2x2x2</span>
-    <span class="section-pill" onclick="showSection('m2','s2-3', this)">Alertas y Beneficios</span>
-    <span class="section-pill" onclick="showSection('m2','s2-5', this)">Autoevaluación</span>
+    <span class="section-pill active" onclick="showSection('m2','s2-0', this)">El Espectro</span>
+    <span class="section-pill" onclick="showSection('m2','s2-1', this)">Autoevaluación</span>
   </div>
 
-  <!-- SECTION 0: INTRO & ESPECTRO -->
   <div class="section-block visible" id="s2-0">
     <div class="banner m2-theme">
-      <div class="banner-icon">🧠</div>
-      <div>
-        <h3>Adicciones no químicas y Reeducación</h3>
-        <p>Aunque las pantallas son herramientas útiles, su uso excesivo genera efectos negativos. El término "adicción" solemos asociarlo a químicos (alcohol, drogas), pero existen <strong>adicciones no químicas o psicológicas</strong> asociadas a conductas excesivas (videojuegos, redes sociales).</p>
-        <p style="margin-top:8px;"><strong>El objetivo:</strong> El trabajo de reeducación de conductas nocivas no es prohibir la tecnología, sino centrarse en <strong>cambiar los hábitos de uso, manejar la ansiedad y controlar los impulsos</strong> adoptando el autocuidado.</p>
-      </div>
-    </div>
-
-    <h3 class="font-syne" style="font-size:22px; font-weight:800; margin: 48px 0 24px;">El Espectro de Conductas Digitales</h3>
-    <div class="spectrum-grid">
-      <div class="spectrum-card uso">
-        <div class="spec-title">🟢 USO</div>
-        <div class="spec-body">
-          <p><strong>Conducta normal y saludable. Un usuario capaz de:</strong></p>
-          <ul>
-            <li>Controlar el tiempo de conexión y exposición.</li>
-            <li>Dar prioridad a las actividades escolares, sociales y académicas por sobre el juego online.</li>
-          </ul>
-        </div>
-      </div>
-      <div class="spectrum-card abuso">
-        <div class="spec-title">🟡 ABUSO</div>
-        <div class="spec-body">
-          <p><strong>Uso excesivo que afecta la calidad de vida:</strong></p>
-          <ul>
-            <li>Cambio negativo en hábitos de sueño y alimentación.</li>
-            <li>Alteraciones en la concentración.</li>
-            <li>Estados ansiosos e <strong>irritabilidad extrema</strong> cuando se le pide desconectarse.</li>
-          </ul>
-        </div>
-      </div>
-      <div class="spectrum-card adiccion">
-        <div class="spec-title">🔴 ADICCIÓN</div>
-        <div class="spec-body">
-          <p><strong>Problema severo con 3 elementos claves:</strong></p>
-          <ul>
-            <li><strong>Incapacidad de autocontrol:</strong> No puede dejar de jugar a pesar de intentarlo.</li>
-            <li><strong>Dependencia psicológica:</strong> Deseo incontrolable, pensamientos obsesivos.</li>
-            <li><strong>Daños sociales:</strong> Conflictos familiares, pérdida de amistades, sentimientos de culpa/angustia.</li>
-          </ul>
-        </div>
+      <div class="banner-icon">📐</div>
+      <div class="banner-content">
+        <h3>La Regla 2 × 2 × 2</h3>
+        <p><strong>2 horas</strong> máximo de ocio digital al día.<br><strong>20 segundos</strong> mirando a lo lejos cada 20 min.<br><strong>2 horas</strong> sin pantallas antes de dormir.</p>
       </div>
     </div>
   </div>
 
-  <!-- SECTION 1: RIESGOS (HOTSPOT) -->
   <div class="section-block" id="s2-1">
-    <div class="hotspot-wrap">
-      <div class="hotspot-header">
-        <h3>Impacto del Uso Excesivo</h3>
-        <p>Toca cada punto en los dispositivos para explorar los riesgos asociados.</p>
+    <div class="quiz-wrap">
+      <div class="quiz-question">¿Qué es una señal de abuso tecnológico?</div>
+      <div class="quiz-options">
+        <div class="quiz-opt wrong">Usarlo para hacer tareas escolares.</div>
+        <div class="quiz-opt correct">Irritabilidad aguda al desconectarse y pérdida de sueño.</div>
       </div>
-      <div class="screen-diagram">
-        <!-- Phone diagram -->
-        <div class="screen-figure">
-          <div class="screen-device">
-            <div class="screen-face">📱</div>
-            <div class="hotspot-point" style="top:-8px; left:50%; transform:translateX(-50%);">
-              <div class="hotspot-dot">A</div>
-              <div class="hotspot-tooltip left" style="left:40px; top:-10px;">
-                <strong>Fatiga visual y ocular</strong>
-                Genera sequedad, dolores de cabeza y visión borrosa por la exposición constante sin descanso.
-              </div>
-            </div>
-            <div class="hotspot-point" style="top:50px; right:-12px;">
-              <div class="hotspot-dot">B</div>
-              <div class="hotspot-tooltip left">
-                <strong>Mala postura</strong>
-                El dolor de cuello (cuello de texto) y espalda son comunes por inclinarse horas sobre el dispositivo.
-              </div>
-            </div>
-            <div class="hotspot-point" style="bottom:20px; left:-12px;">
-              <div class="hotspot-dot">C</div>
-              <div class="hotspot-tooltip">
-                <strong>Emocional: Ansiedad</strong>
-                Ansiedad y estrés por la sobreexposición, la comparación social y la baja autoestima al ver vidas irreales.
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- Laptop diagram -->
-        <div class="screen-figure" style="width:280px;">
-          <div style="position:relative;">
-            <div class="screen-device" style="border-radius:12px 12px 0 0;">
-              <div class="screen-face" style="height:110px;">💻</div>
-              <div class="hotspot-point" style="top:10px; right:-12px;">
-                <div class="hotspot-dot">D</div>
-                <div class="hotspot-tooltip left">
-                  <strong>Alteraciones del Sueño</strong>
-                  La luz azul inhibe la melatonina, causando problemas severos para dormir y descansar.
-                </div>
-              </div>
-              <div class="hotspot-point" style="top:60px; left:-12px;">
-                <div class="hotspot-dot">E</div>
-                <div class="hotspot-tooltip">
-                  <strong>Sedentarismo</strong>
-                  Largas horas sentado aumentan significativamente el riesgo de sobrepeso y enfermedades metabólicas.
-                </div>
-              </div>
-            </div>
-            <div style="height:12px; background:linear-gradient(90deg,#0d2035,#1a3048,#0d2035); border-radius:0 0 4px 4px;"></div>
-            <div style="height:8px; width:140px; margin:0 auto; background:#0a1828; border-radius:0 0 10px 10px;"></div>
-            <div class="hotspot-point" style="bottom:14px; right:-6px;">
-              <div class="hotspot-dot">F</div>
-              <div class="hotspot-tooltip left">
-                <strong>Social: Aislamiento</strong>
-                Distracción en clases, dificultad para comunicarse cara a cara y aislamiento de la familia y amigos.
-              </div>
-            </div>
-          </div>
-        </div>
+      <div class="quiz-feedback show ok" style="margin-top:20px;">
+        <strong>¡Correcto!</strong> La alteración del humor es una señal clara de alerta.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MÓDULO 3 (NUEVO: ALCOHOL Y ENERGIZANTES) ===== -->
+<div class="content-area m3" id="m3">
+  <button class="close-btn" onclick="closeModule('m3')">← Volver a los Módulos</button>
+  
+  <div class="content-header">
+    <div class="content-header-icon">⚡</div>
+    <div>
+      <h2>Bebidas Alcohólicas y Energizantes</h2>
+      <p>Control de consumo, comprensión de riesgos biológicos y desmitificación de las bebidas estimulantes.</p>
+    </div>
+  </div>
+
+  <!-- SECTIONS NAV -->
+  <div class="nav-wrapper" id="nav-m3">
+    <span class="section-pill active" onclick="showSection('m3','s3-0', this)">¿Qué son?</span>
+    <span class="section-pill" onclick="showSection('m3','s3-1', this)">Efectos y Peligros</span>
+    <span class="section-pill" onclick="showSection('m3','s3-2', this)">Estrategias Familia/Escuela</span>
+    <span class="section-pill" onclick="showSection('m3','s3-3', this)">Dinámica y Videos</span>
+    <span class="section-pill" onclick="showSection('m3','s3-4', this)">Autoevaluación</span>
+  </div>
+
+  <!-- S3-0: INTRO -->
+  <div class="section-block visible" id="s3-0">
+    <div class="banner m3-theme">
+      <div class="banner-icon">🧠</div>
+      <div class="banner-content">
+        <h3>¿Por qué hablamos de esto?</h3>
+        <p>Lo que eliges hoy afecta tu salud y tu futuro. Informarte te ayuda a tomar mejores decisiones frente a sustancias que se han normalizado socialmente pero que conllevan graves riesgos biológicos y psicológicos.</p>
       </div>
     </div>
 
-    <h3 class="font-syne" style="font-size:22px; font-weight:800; margin: 40px 0 24px;">Resumen de Riesgos</h3>
     <div class="cards-grid">
       <div class="glass-card">
-        <div class="card-icon">🏃</div>
-        <div class="card-title">Problemas Físicos</div>
-        <div class="card-body"><ul><li>Fatiga visual y sequedad ocular.</li><li>Dolores de cabeza, cuello y espalda (mala postura).</li><li>Alteraciones del sueño por exposición a luz azul.</li><li>Sedentarismo y aumento de riesgo de sobrepeso.</li></ul></div>
+        <div class="card-icon">🍷</div>
+        <div class="card-title">Bebidas Alcohólicas</div>
+        <div class="card-body">
+          <p>Contienen etanol (alcohol etílico). Se obtienen de la transformación de azúcares de frutas/cereales gracias a levaduras.</p>
+          <ul>
+            <li><strong>Fermentadas:</strong> Cerveza, vino.</li>
+            <li><strong>Destiladas:</strong> Aguardiente, ron, vodka.</li>
+            <li>Actúan como una <strong>droga recreativa depresora</strong> del sistema nervioso central.</li>
+          </ul>
+        </div>
       </div>
       <div class="glass-card">
-        <div class="card-icon">😰</div>
-        <div class="card-title">Emocionales y Mentales</div>
-        <div class="card-body"><ul><li>Ansiedad y estrés por redes sociales.</li><li>Dificultad para concentrarse.</li><li>Irritabilidad o dependencia al dispositivo.</li><li>Comparación social y baja autoestima.</li></ul></div>
-      </div>
-      <div class="glass-card">
-        <div class="card-icon">🧍</div>
-        <div class="card-title">Problemas Sociales</div>
-        <div class="card-body"><ul><li>Aislamiento de la familia o amigos físicos.</li><li>Dificultad para comunicarse cara a cara.</li><li>Distracción en clases o actividades importantes.</li></ul></div>
+        <div class="card-icon">🥫</div>
+        <div class="card-title">Bebidas Energizantes</div>
+        <div class="card-body">
+          <p>Bebidas sin alcohol diseñadas para estimular temporalmente el sistema nervioso.</p>
+          <ul>
+            <li>No son bebidas hidratantes ni refrescos comunes.</li>
+            <li>Contienen altas dosis de cafeína, azúcar y taurina.</li>
+            <li>Solo <strong>enmascaran la fatiga temporalmente</strong>; no aportan energía real.</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- SECTION 2: ESTRATEGIAS & REGLA 2x2x2 -->
-  <div class="section-block" id="s2-2">
-    <div class="banner m2-theme">
-      <div class="banner-icon">📐</div>
-      <div>
-        <h3>La Regla 2 × 2 × 2</h3>
-        <p>Una estrategia recomendada por profesionales para gestionar el tiempo de pantalla y proteger la vista y la mente de forma simple.</p>
-      </div>
-    </div>
-    
-    <div class="rule-grid">
-      <div class="rule-item">
-        <div class="rule-num">2</div>
-        <div class="rule-text">horas <strong>máximo de ocio digital</strong> al día (ideal 45-60 min para menores).</div>
-      </div>
-      <div class="rule-item">
-        <div class="rule-num">20</div>
-        <div class="rule-text">segundos de descanso mirando a lo lejos (6m) cada <strong>20 minutos</strong>.</div>
-      </div>
-      <div class="rule-item">
-        <div class="rule-num">2h</div>
-        <div class="rule-text"><strong>antes de dormir</strong>: evitar por completo las pantallas (protege la melatonina).</div>
+  <!-- S3-1: EFECTOS Y PELIGROS -->
+  <div class="section-block" id="s3-1">
+    <div class="banner danger">
+      <div class="banner-icon">⚠️</div>
+      <div class="banner-content">
+        <h3>EL PELIGRO EXTREMO: Mezclar ambas</h3>
+        <p>Combinar energizantes con alcohol es <strong>altamente peligroso</strong>. La cafeína enmascara los efectos de la borrachera, haciendo que la persona se sienta "alerta" cuando en realidad está intoxicada. Esto incrementa notablemente el riesgo de un coma etílico, lesiones graves y fallas cardíacas.</p>
       </div>
     </div>
 
-    <h3 class="font-syne" style="font-size:22px; font-weight:800; margin: 40px 0 24px;">Estrategias para un uso responsable</h3>
+    <h3 class="font-syne" style="font-size:24px; font-weight:800; margin: 40px 0 20px; color:var(--neon-magenta); text-shadow:0 0 10px var(--neon-magenta-glow);">Daños Comprobados</h3>
+    
     <div class="accordion">
       <div class="acc-item">
         <button class="acc-header" onclick="toggleAccordion(this)">
-          A. Límites y Tiempos <span class="acc-icon">▼</span>
+          Impacto del Alcohol <span class="acc-icon">▼</span>
         </button>
         <div class="acc-body">
           <ul>
-            <li>Los tiempos de conexión al ocio deben ser acotados a 45-60 minutos al día. Al hacer tareas, se suma un tiempo extra.</li>
-            <li>Usar aplicaciones de control de tiempo si es necesario.</li>
-            <li>Evitar pantallas mientras se come.</li>
+            <li><strong>Físicos:</strong> Daño severo al hígado, cerebro, corazón, sistema nervioso y sistema digestivo. Aumenta el riesgo de cáncer.</li>
+            <li><strong>Sociales:</strong> Incremento en la probabilidad de accidentes y actos de violencia.</li>
+            <li><strong>Salud Mental:</strong> Trastornos psicológicos, ansiedad exacerbada y alta dependencia (adicción).</li>
+            <li><em>Nota:</em> Altera el estado de ánimo, la coordinación y el juicio casi de inmediato.</li>
           </ul>
         </div>
       </div>
       <div class="acc-item">
         <button class="acc-header" onclick="toggleAccordion(this)">
-          B. Rutinas Saludables y Postura <span class="acc-icon">▼</span>
+          Impacto de las Bebidas Energizantes <span class="acc-icon">▼</span>
         </button>
         <div class="acc-body">
           <ul>
-            <li><strong>Privilegiar las actividades al aire libre</strong>, deporte y lectura por sobre lo digital.</li>
-            <li>Mantener horarios regulares de estudio y descanso.</li>
-            <li>Pantalla a la altura de los ojos, espalda recta y pies apoyados.</li>
-            <li>Ajustar brillo y tamaño de letra, usando luz ambiental adecuada.</li>
-          </ul>
-        </div>
-      </div>
-      <div class="acc-item">
-        <button class="acc-header" onclick="toggleAccordion(this)">
-          C. Entorno, Familia y Crítica <span class="acc-icon">▼</span>
-        </button>
-        <div class="acc-body">
-          <ul>
-            <li><strong>Acuerdos con otras familias:</strong> Organizar los tiempos de conexión de los amigos para evitar presión social.</li>
-            <li>Permitir el acceso según la <strong>edad y real necesidad</strong>.</li>
-            <li>Fomentar pensamiento crítico: identificar información falsa y evitar compararse con imágenes irreales.</li>
-            <li>Establecer normas claras en casa y conversar sobre ciberacoso y privacidad.</li>
-            <li>Educar en la libertad para que aprendan a elegir lo bueno para ellos.</li>
+            <li><strong>Cardiovasculares:</strong> Provocan taquicardia y picos de presión arterial peligrosos.</li>
+            <li><strong>Sistema Nervioso:</strong> Causan insomnio, ansiedad crónica y dependencia a estimulantes.</li>
+            <li><strong>Metabólico:</strong> Promueven la deshidratación y descontrol del azúcar en la sangre.</li>
+            <li><em>Población vulnerable:</em> Impactan con mayor severidad a niños, adolescentes y mujeres embarazadas.</li>
           </ul>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- SECTION 3: ALERTAS Y BENEFICIOS -->
-  <div class="section-block" id="s2-3">
-    <div class="banner danger">
-      <div class="banner-icon">⚠️</div>
-      <div>
-        <h3>Señales de alerta de uso problemático</h3>
-        <p>Si identificas varias de estas señales, la conducta digital está pasando de "Uso" a "Abuso" o "Adicción", requiriendo reeducación o ayuda profesional.</p>
+  <!-- S3-2: ESTRATEGIAS -->
+  <div class="section-block" id="s3-2">
+    <div class="banner m3-theme">
+      <div class="banner-icon">🛡️</div>
+      <div class="banner-content">
+        <h3>Prevención: Alcohol</h3>
+        <p>La estrategia más efectiva consiste en modificar hábitos y rediseñar tu entorno social. Implementar metas medibles disminuye drásticamente las probabilidades de consumo.</p>
       </div>
     </div>
 
-    <div class="alert-grid">
-      <div class="alert-item"><span class="ai">😤</span><div>Irritabilidad aguda o mal humor cuando no se puede usar el dispositivo o se pide la desconexión.</div></div>
-      <div class="alert-item"><span class="ai">📚</span><div>Descuidar tareas escolares o responsabilidades por focalizarse solo en la pantalla.</div></div>
-      <div class="alert-item"><span class="ai">🌙</span><div>Dormir menos horas por estar conectado, alterando ritmos biológicos.</div></div>
-      <div class="alert-item"><span class="ai">🧍</span><div>Aislamiento social, pérdida de amistades reales e interés nulo en actividades fuera de pantalla.</div></div>
-      <div class="alert-item"><span class="ai">🤫</span><div>Uso secreto o a escondidas de los dispositivos.</div></div>
-    </div>
-
-    <div class="commitment m2">
-      <h3>🌟 Beneficios del uso equilibrado</h3>
-      <p>Lograr un balance digital no solo previene enfermedades, sino que mejora activamente nuestra vida en múltiples aspectos:</p>
-      <div class="commitment-items">
-        <span class="ci">Mejor concentración académica</span>
-        <span class="ci">Sueño reparador</span>
-        <span class="ci">Relaciones sociales fuertes</span>
-        <span class="ci">Mayor creatividad y productividad</span>
+    <div class="cards-grid">
+      <div class="glass-card">
+        <div class="card-icon">🏠</div>
+        <div class="card-title">Estrategias de Entorno</div>
+        <div class="card-body">
+          <ul>
+            <li><strong>Elimina el alcohol de casa:</strong> Evita el consumo por impulso.</li>
+            <li><strong>Evita lugares de riesgo:</strong> Reduce visitas a bares donde el propósito sea beber excesivamente.</li>
+            <li><strong>Aprende a decir "no":</strong> Practica frases firmes sin dar largas explicaciones.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="glass-card">
+        <div class="card-icon">🔄</div>
+        <div class="card-title">Modificación de Hábitos</div>
+        <div class="card-body">
+          <ul>
+            <li><strong>Sustituye la bebida:</strong> Usa mocktails, agua con gas o infusiones.</li>
+            <li><strong>Identifica detonantes:</strong> Registra si bebes por estrés o aburrimiento.</li>
+            <li><strong>Mente ocupada:</strong> Inicia ejercicio o cursos que bloqueen el tiempo libre.</li>
+          </ul>
+        </div>
       </div>
     </div>
-    
-    <!-- Enlaces -->
-    <div class="glass-card" style="margin-top: 24px; padding: 24px; text-align:center;">
-      <p style="font-family:'Syne',sans-serif; font-weight:700; margin-bottom:12px; color:var(--blue);">Recursos de apoyo: Convivencia Digital y Autocuidado</p>
-      <div style="display:flex; justify-content:center; gap:20px; flex-wrap:wrap;">
-        <a href="http://www.protecciononline.com/" target="_blank" style="color:var(--muted); text-decoration:none; border:1px solid var(--glass-border); padding:8px 16px; border-radius:100px; font-size:14px; transition:all 0.3s;">Protección Online</a>
-        <a href="https://www.commonsensemedia.org/espanol/blog" target="_blank" style="color:var(--muted); text-decoration:none; border:1px solid var(--glass-border); padding:8px 16px; border-radius:100px; font-size:14px; transition:all 0.3s;">Common Sense Media</a>
+
+    <h3 class="font-syne" style="font-size:24px; font-weight:800; margin: 40px 0 20px; color:var(--white);">Recomendaciones para Familias y Colegios</h3>
+    <div class="accordion">
+      <div class="acc-item">
+        <button class="acc-header" onclick="toggleAccordion(this)">
+          Rol de la Familia <span class="acc-icon">▼</span>
+        </button>
+        <div class="acc-body">
+          <ul>
+            <li><strong>Sé un ejemplo positivo:</strong> No normalices el uso de alcohol para lidiar con el estrés.</li>
+            <li><strong>Cero permisividad:</strong> Está estrictamente prohibido antes de los 18. El mito de "aprender a beber en casa" NO es seguro.</li>
+            <li><strong>Fortalece la autoestima:</strong> Elogia los logros para que puedan resistir la presión grupal.</li>
+            <li><strong>Control de energizantes:</strong> Explica que NO son refrescos ni sirven para el deporte (deshidratan).</li>
+          </ul>
+        </div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-header" onclick="toggleAccordion(this)">
+          Rol del Entorno Educativo <span class="acc-icon">▼</span>
+        </button>
+        <div class="acc-body">
+          <ul>
+            <li><strong>Desvincula ocio y alcohol:</strong> Fomenta el deporte y arte extracurricular.</li>
+            <li><strong>Fomenta pensamiento crítico:</strong> Talleres sobre las mentiras publicitarias del alcohol/energizantes.</li>
+            <li><strong>Capacita al docente:</strong> Identificar señales tempranas (abandono escolar, cambios de conducta).</li>
+            <li><strong>Alianzas:</strong> Escuelas de padres obligatorias para unificar el discurso en casa y el aula.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-header" onclick="toggleAccordion(this)">
+          Cómo dejar los Energizantes <span class="acc-icon">▼</span>
+        </button>
+        <div class="acc-body">
+          <ul>
+            <li><strong>Reducción gradual:</strong> Evita dejarlas de golpe para mitigar la abstinencia por cafeína.</li>
+            <li><strong>Higiene del sueño:</strong> Dormir 7-8 horas elimina la necesidad de estimulantes artificiales.</li>
+            <li><strong>Hidratación real:</strong> Sustituye la lata por agua.</li>
+            <li><strong>Nutrición:</strong> Come fibra y proteínas para mantener energía estable.</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- SECTION 4: QUIZ M2 -->
-  <div class="section-block" id="s2-5">
+  <!-- S3-3: DINÁMICA Y VIDEOS -->
+  <div class="section-block" id="s3-3">
+    <div class="banner m3-theme">
+      <div class="banner-icon">🗣️</div>
+      <div class="banner-content">
+        <h3>Dinámica: El Defensor del No</h3>
+        <p><strong>Desarrollo:</strong> En tríos: un "persuador" (intenta convencer de beber), un "presionado" y un "observador". El presionado usa técnicas para negarse (humor, cambio de tema, negativa directa).<br>
+        <strong>Reflexión:</strong> Analizar qué respuestas fueron fáciles y cómo se sintió el lenguaje corporal al decir NO.</p>
+      </div>
+    </div>
+
+    <div class="cards-grid">
+      <div class="glass-card" style="grid-column: 1 / -1;">
+        <div class="card-title" style="color:var(--neon-magenta); text-shadow:0 0 10px var(--neon-magenta-glow);">Conclusiones Clave</div>
+        <div class="card-body">
+          <ul>
+            <li>El consumo de alcohol en la adolescencia <strong>no es una etapa obligatoria</strong>, es un riesgo biológico prevenible.</li>
+            <li>Las bebidas energizantes <strong>no son hidratantes</strong>. Tienen altas concentraciones psicoactivas.</li>
+            <li>El cansancio real se combate con <strong>descanso (sueño), agua y comida</strong>, no con estimulantes que solo ocultan la fatiga.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="font-syne" style="font-size:24px; font-weight:800; margin: 40px 0 20px; color:var(--white);">Material Audiovisual</h3>
+    <div class="video-grid">
+      <div class="video-wrapper">
+        <iframe src="https://www.youtube.com/embed/OwUXu6rWQRw?start=12" title="Video sobre Alcohol" allowfullscreen></iframe>
+      </div>
+      <div class="video-wrapper">
+        <iframe src="https://www.youtube.com/embed/Pi9gIjCa418?start=20" title="Video sobre Bebidas Energizantes" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- S3-4: QUIZ M3 -->
+  <div class="section-block" id="s3-4">
     <div class="quiz-wrap">
-      <div id="quiz2-container">
-        <div class="quiz-question" id="q2-text"></div>
-        <div class="quiz-options" id="q2-opts"></div>
-        <div class="quiz-feedback" id="q2-feedback"></div>
+      <div id="quiz3-container">
+        <div class="quiz-question" id="q3-text"></div>
+        <div class="quiz-options" id="q3-opts"></div>
+        <div class="quiz-feedback" id="q3-feedback"></div>
         <div class="quiz-nav">
-          <span class="quiz-progress" id="q2-progress"></span>
-          <button class="btn-quiz" id="q2-next" onclick="nextQ2()" style="display:none">Siguiente Pregunta →</button>
+          <span class="quiz-progress" id="q3-progress"></span>
+          <button class="btn-quiz" id="q3-next" onclick="nextQ3()" style="display:none">Siguiente Pregunta →</button>
         </div>
       </div>
-      <div id="quiz2-result" style="display:none; text-align:center;">
-        <div style="font-size:64px; margin-bottom:20px; animation: pulse-ring 2s infinite;" id="quiz2-emoji"></div>
-        <div style="font-family:'Outfit',sans-serif; font-size:32px; font-weight:800; margin-bottom:12px; color:var(--white);" id="quiz2-score"></div>
-        <div style="color:var(--muted); font-size:16px; margin-bottom:32px; max-width: 400px; margin-inline: auto;" id="quiz2-msg"></div>
-        <button class="btn-quiz" onclick="resetQ2()">Intentar de nuevo</button>
+      <div id="quiz3-result" style="display:none; text-align:center;">
+        <div style="font-size:72px; margin-bottom:20px; animation: floatIcon 2s infinite;" id="quiz3-emoji"></div>
+        <div style="font-family:'Montserrat Alternates',sans-serif; font-size:36px; font-weight:800; margin-bottom:16px; color:var(--neon-magenta); text-shadow: 0 0 20px var(--neon-magenta-glow);" id="quiz3-score"></div>
+        <div style="color:var(--text-muted); font-size:18px; margin-bottom:40px; max-width: 500px; margin-inline: auto;" id="quiz3-msg"></div>
+        <button class="btn-quiz" onclick="resetQ3()">Intentar de nuevo</button>
       </div>
     </div>
   </div>
+
 </div>
 
 <script>
@@ -1085,7 +773,6 @@ function showSection(mod, sId, pill) {
   const target = document.getElementById(sId);
   target.classList.add('visible');
   
-  // Scroll adjustment for sticky nav
   const y = target.getBoundingClientRect().top + window.scrollY - 120;
   window.scrollTo({top: y, behavior: 'smooth'});
 }
@@ -1096,59 +783,43 @@ function toggleAccordion(btn) {
   item.classList.toggle('active');
 }
 
-// ====== TOUCH HOTSPOTS ======
-document.querySelectorAll('.hotspot-point').forEach(pt => {
-  pt.addEventListener('click', (e) => {
-    // Only remove active if clicking another one
-    const wasActive = pt.classList.contains('active');
-    document.querySelectorAll('.hotspot-point').forEach(p => p.classList.remove('active'));
-    if (!wasActive) pt.classList.add('active');
-    e.stopPropagation();
-  });
-});
-
-// Click outside to close hotspots
-document.addEventListener('click', () => {
-  document.querySelectorAll('.hotspot-point').forEach(p => p.classList.remove('active'));
-});
-
-// ====== QUIZ 1 ======
-const quiz1 = [
-  { q: "El cigarrillo y el vapeador contienen miles de químicos. ¿Cuál de estos tóxicos se utiliza como insecticida?", opts: ["Dimetil éter","Diacetil","Linalol","Acroleína"], ans: 2, exp: "Correcto. El Linalol es un químico usado comúnmente como insecticida y está presente en estos productos." },
-  { q: "¿Es el vapeador una alternativa recomendada por la OMS para dejar de fumar?", opts: ["Sí, si no tiene nicotina.","Falso. Aumenta de 2 a 4 veces la probabilidad de fumar cigarrillos comunes.","Sí, porque el vapor es inofensivo.","Depende del sabor."], ans: 1, exp: "Falso. Su eficacia no está comprobada y es una puerta de entrada a la adicción, aumentando drásticamente la probabilidad de fumar." },
-  { q: "¿Cuál de estos es un Daño Mutagénico causado por el humo y aerosoles?", opts: ["Asma severa.","Aumento de presión arterial.","Alteraciones a la estructura genética y aumento de riesgo de cáncer.","Mala postura."], ans: 2, exp: "Exacto. Compuestos como las nitrosaminas dañan la estructura genética (mutagénico), aumentando el riesgo de cáncer y daños reproductivos." },
-  { q: "¿Por qué el consumo afecta también a mujeres embarazadas y sus bebés?", opts: ["Solo afecta si fuman diariamente.","Causa irritación ocular en el bebé.","Puede causar bajo peso al nacer, parto prematuro y problemas de desarrollo.","No los afecta si es vapeador."], ans: 2, exp: "La exposición, incluso pasiva, afecta gravemente el desarrollo del feto, causando bajo peso y partos prematuros." },
-  { q: "¿Qué avala la prohibición de estos productos en espacios libres de humo?", opts: ["Una sugerencia escolar.","El Artículo 4° Constitucional, que protege el derecho a la salud y un medio ambiente sano.","Una regla de las empresas tabacaleras.","El capricho de algunos adultos."], ans: 1, exp: "El Artículo 4° Constitucional y el interés superior de salud justifican las prohibiciones legales de los SEAN y SSSN." },
+// ====== QUIZ 3 (BEBIDAS ALCOHÓLICAS Y ENERGIZANTES) ======
+const quiz3 = [
+  { q: "¿Por qué es ALTAMENTE peligroso mezclar bebidas energizantes con alcohol?", opts: ["Porque cambia el sabor de la bebida.","Porque la cafeína enmascara los efectos de la borrachera, aumentando el riesgo de coma etílico.","Porque te da sueño más rápido.","No es peligroso."], ans: 1, exp: "La cafeína te hace sentir 'alerta' aunque estés intoxicado, disparando conductas de riesgo y fallas cardíacas." },
+  { q: "Según la guía, ¿qué efecto tiene el alcohol en el sistema nervioso central?", opts: ["Actúa como un estimulante y mejora los reflejos.","Hidrata el cuerpo.","Actúa como un depresor, alterando el estado de ánimo, coordinación y juicio.","Aumenta la capacidad de atención."], ans: 2, exp: "El alcohol es una droga recreativa con efecto depresor que daña el cerebro, hígado y el juicio casi de inmediato." },
+  { q: "¿Cuál es una recomendación clave para la familia frente al consumo en menores de edad?", opts: ["Enseñarles a beber en casa para que aprendan a controlarse.","Cero permisividades: está estrictamente prohibido antes de los 18 años.","Contar anécdotas graciosas de borracheras.","Comprarles bebidas bajas en alcohol."], ans: 1, exp: "El mito de 'aprender a beber en casa' es peligroso. La regla debe ser cero alcohol antes de los 18 para proteger su desarrollo cerebral." },
+  { q: "Si una persona consume energizantes a diario, ¿cómo debería dejarlos?", opts: ["De golpe de un día para otro.","Reemplazándolos con alcohol.","Mediante reducción gradual para mitigar el síndrome de abstinencia por cafeína.","Dejando de comer."], ans: 2, exp: "El cuerpo genera dependencia a la cafeína; dejarla de golpe causa fuertes abstinencias. Se recomienda reducción gradual." },
+  { q: "¿Cómo se debe combatir realmente el cansancio de forma sostenible?", opts: ["Tomando una bebida energizante extra grande.","Con buena higiene del sueño (7-8 horas), hidratación con agua y nutrición balanceada.","Comiendo puros dulces.","No durmiendo para acostumbrar al cuerpo."], ans: 1, exp: "Los energizantes solo enmascaran la fatiga temporalmente. El verdadero descanso viene del sueño y la buena alimentación." }
 ];
 
-let q1i = 0, q1score = 0;
+let q3i = 0, q3score = 0;
 
-function loadQ1() {
-  const q = quiz1[q1i];
-  document.getElementById('q1-text').textContent = `${q1i+1}. ${q.q}`;
-  document.getElementById('q1-progress').textContent = `PREGUNTA ${q1i+1} DE ${quiz1.length}`;
-  const opts = document.getElementById('q1-opts');
+function loadQ3() {
+  const q = quiz3[q3i];
+  document.getElementById('q3-text').textContent = `${q3i+1}. ${q.q}`;
+  document.getElementById('q3-progress').textContent = `PREGUNTA ${q3i+1} DE ${quiz3.length}`;
+  const opts = document.getElementById('q3-opts');
   opts.innerHTML = '';
   q.opts.forEach((o, i) => {
     const btn = document.createElement('button');
     btn.className = 'quiz-opt';
     btn.textContent = o;
-    btn.onclick = () => selectQ1(i);
+    btn.onclick = () => selectQ3(i);
     opts.appendChild(btn);
   });
-  document.getElementById('q1-feedback').className = 'quiz-feedback';
-  document.getElementById('q1-next').style.display = 'none';
+  document.getElementById('q3-feedback').className = 'quiz-feedback';
+  document.getElementById('q3-next').style.display = 'none';
 }
 
-function selectQ1(i) {
-  const q = quiz1[q1i];
-  const opts = document.querySelectorAll('#q1-opts .quiz-opt');
+function selectQ3(i) {
+  const q = quiz3[q3i];
+  const opts = document.querySelectorAll('#q3-opts .quiz-opt');
   opts.forEach(o => o.onclick = null); // Disable further clicks
-  const fb = document.getElementById('q1-feedback');
+  const fb = document.getElementById('q3-feedback');
   
   if (i === q.ans) {
     opts[i].classList.add('correct');
-    q1score++;
+    q3score++;
     fb.className = 'quiz-feedback show ok';
     fb.innerHTML = `<strong>¡Correcto!</strong><br>${q.exp}`;
   } else {
@@ -1157,108 +828,35 @@ function selectQ1(i) {
     fb.className = 'quiz-feedback show fail';
     fb.innerHTML = `<strong>Incorrecto</strong><br>${q.exp}`;
   }
-  const nextBtn = document.getElementById('q1-next');
+  const nextBtn = document.getElementById('q3-next');
   nextBtn.style.display = 'block';
-  nextBtn.textContent = q1i < quiz1.length - 1 ? 'Siguiente Pregunta →' : 'Ver Resultados Completos';
+  nextBtn.textContent = q3i < quiz3.length - 1 ? 'Siguiente Pregunta →' : 'Ver Resultados Completos';
 }
 
-function nextQ1() {
-  q1i++;
-  if (q1i >= quiz1.length) { showQ1Result(); return; }
-  loadQ1();
+function nextQ3() {
+  q3i++;
+  if (q3i >= quiz3.length) { showQ3Result(); return; }
+  loadQ3();
 }
 
-function showQ1Result() {
-  document.getElementById('quiz1-container').style.display = 'none';
-  document.getElementById('quiz1-result').style.display = 'block';
-  const pct = q1score / quiz1.length;
-  document.getElementById('quiz1-emoji').textContent = pct >= 0.8 ? '🏆' : pct >= 0.6 ? '👍' : '📖';
-  document.getElementById('quiz1-score').textContent = `${q1score} / ${quiz1.length} Correctas`;
-  document.getElementById('quiz1-msg').textContent = pct >= 0.8 ? '¡Excelente! Dominas a la perfección los riesgos reales y las estrategias de prevención del tabaquismo.' : pct >= 0.6 ? 'Buen trabajo. Tienes bases sólidas, repasa algunas secciones para lograr la excelencia.' : 'Te recomendamos revisar el material y las secciones desplegables nuevamente. ¡El conocimiento es prevención!';
+function showQ3Result() {
+  document.getElementById('quiz3-container').style.display = 'none';
+  document.getElementById('quiz3-result').style.display = 'block';
+  const pct = q3score / quiz3.length;
+  document.getElementById('quiz3-emoji').textContent = pct >= 0.8 ? '⚡🏆' : pct >= 0.6 ? '⚡👍' : '📖';
+  document.getElementById('quiz3-score').textContent = `${q3score} / ${quiz3.length} Correctas`;
+  document.getElementById('quiz3-msg').textContent = pct >= 0.8 ? '¡Brutal! Tienes el conocimiento necesario para tomar decisiones inteligentes y liderar con el ejemplo.' : pct >= 0.6 ? 'Buen trabajo. Estás muy cerca, repasa los efectos físicos para alcanzar la perfección.' : 'Te recomendamos revisar el módulo nuevamente. Recuerda que la información es clave para proteger tu salud.';
 }
 
-function resetQ1() {
-  q1i = 0; q1score = 0;
-  document.getElementById('quiz1-container').style.display = 'block';
-  document.getElementById('quiz1-result').style.display = 'none';
-  loadQ1();
-}
-
-// ====== QUIZ 2 ======
-const quiz2 = [
-  { q: "El término 'Adicción' en el uso de pantallas no es químico, sino psicológico. ¿Cuáles son sus 3 elementos claves?", opts: ["Jugar, perder y ganar.","Incapacidad de autocontrol, dependencia psicológica y efectos dañinos sociales.","Celulares, tabletas y consolas.","Falta de sueño, mala postura y sedentarismo."], ans: 1, exp: "La adicción se define por la pérdida de control, la obsesión (dependencia) y el daño en las relaciones o vida social." },
-  { q: "¿En qué consiste la regla del '20' en la estrategia 2x2x2?", opts: ["Jugar solo 20 minutos al día.","Tener la pantalla a 20 centímetros.","Cada 20 minutos, descansar la vista mirando a lo lejos (6m) por 20 segundos.","Usar el dispositivo hasta las 20:00 horas."], ans: 2, exp: "Descansar la vista cada 20 minutos por 20 segundos previene la fatiga ocular y protege la salud visual." },
-  { q: "¿Qué implica la fase de 'Abuso' de la tecnología según el espectro?", opts: ["Dar prioridad a tareas escolares.","Jugar 45 minutos al día.","El tiempo excesivo afecta el sueño, la alimentación y genera estados ansiosos e irritabilidad.","Dejar el celular cargando toda la noche."], ans: 2, exp: "El abuso ocurre cuando los hábitos vitales (sueño, comida) y el humor (ansiedad/irritabilidad) se ven negativamente afectados." },
-  { q: "¿Cuál de los siguientes es un Riesgo Social del uso excesivo?", opts: ["Distracción en clases, aislamiento familiar y dificultad para comunicarse cara a cara.","Sedentarismo y aumento de peso.","La luz azul inhibe la melatonina.","Dolor de cuello (cuello de texto)."], ans: 0, exp: "El aislamiento, la falta de comunicación real y la distracción se clasifican como riesgos sociales." },
-  { q: "Para evitar la presión social sobre los niños, ¿qué estrategia familiar se recomienda?", opts: ["Prohibir a todos los amigos.","Establecer acuerdos con las familias de los amigos para organizar tiempos de conexión conjuntos.","Comprar los mismos juegos.","Ignorar la situación."], ans: 1, exp: "Hacer acuerdos o 'pactos' con otras familias ayuda a sincronizar horarios y crear una red de apoyo comunitaria." },
-];
-
-let q2i = 0, q2score = 0;
-
-function loadQ2() {
-  const q = quiz2[q2i];
-  document.getElementById('q2-text').textContent = `${q2i+1}. ${q.q}`;
-  document.getElementById('q2-progress').textContent = `PREGUNTA ${q2i+1} DE ${quiz2.length}`;
-  const opts = document.getElementById('q2-opts');
-  opts.innerHTML = '';
-  q.opts.forEach((o, i) => {
-    const btn = document.createElement('button');
-    btn.className = 'quiz-opt';
-    btn.textContent = o;
-    btn.onclick = () => selectQ2(i);
-    opts.appendChild(btn);
-  });
-  document.getElementById('q2-feedback').className = 'quiz-feedback';
-  document.getElementById('q2-next').style.display = 'none';
-}
-
-function selectQ2(i) {
-  const q = quiz2[q2i];
-  const opts = document.querySelectorAll('#q2-opts .quiz-opt');
-  opts.forEach(o => o.onclick = null);
-  const fb = document.getElementById('q2-feedback');
-  
-  if (i === q.ans) {
-    opts[i].classList.add('correct');
-    q2score++;
-    fb.className = 'quiz-feedback show ok';
-    fb.innerHTML = `<strong>¡Correcto!</strong><br>${q.exp}`;
-  } else {
-    opts[i].classList.add('wrong');
-    opts[q.ans].classList.add('correct');
-    fb.className = 'quiz-feedback show fail';
-    fb.innerHTML = `<strong>Incorrecto</strong><br>${q.exp}`;
-  }
-  const nextBtn = document.getElementById('q2-next');
-  nextBtn.style.display = 'block';
-  nextBtn.textContent = q2i < quiz2.length - 1 ? 'Siguiente Pregunta →' : 'Ver Resultados Completos';
-}
-
-function nextQ2() {
-  q2i++;
-  if (q2i >= quiz2.length) { showQ2Result(); return; }
-  loadQ2();
-}
-
-function showQ2Result() {
-  document.getElementById('quiz2-container').style.display = 'none';
-  document.getElementById('quiz2-result').style.display = 'block';
-  const pct = q2score / quiz2.length;
-  document.getElementById('quiz2-emoji').textContent = pct >= 0.8 ? '🏆' : pct >= 0.6 ? '👍' : '📖';
-  document.getElementById('quiz2-score').textContent = `${q2score} / ${quiz2.length} Correctas`;
-  document.getElementById('quiz2-msg').textContent = pct >= 0.8 ? '¡Felicidades! Demuestras un excelente manejo de la reeducación y hábitos de vida digital saludable.' : pct >= 0.6 ? 'Buen esfuerzo. Repasa la regla 2x2x2 y el espectro digital para perfeccionar tu conocimiento.' : 'No te preocupes, el mundo digital es complejo. Revisa las secciones desplegables e inténtalo de nuevo.';
-}
-
-function resetQ2() {
-  q2i = 0; q2score = 0;
-  document.getElementById('quiz2-container').style.display = 'block';
-  document.getElementById('quiz2-result').style.display = 'none';
-  loadQ2();
+function resetQ3() {
+  q3i = 0; q3score = 0;
+  document.getElementById('quiz3-container').style.display = 'block';
+  document.getElementById('quiz3-result').style.display = 'none';
+  loadQ3();
 }
 
 // INIT
-loadQ1();
-loadQ2();
+loadQ3();
 </script>
 </body>
 </html>
