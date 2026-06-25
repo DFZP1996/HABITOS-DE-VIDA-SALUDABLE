@@ -143,7 +143,6 @@
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255,255,255,0.05);
-    /* Liquid shape */
     border-radius: 40px;
     transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
     outline: none;
@@ -263,6 +262,36 @@
   .m2 .card-body ul li::before { color: var(--neon-cyan); text-shadow: 0 0 8px var(--neon-cyan); }
   .m3 .card-body ul li::before { color: var(--neon-magenta); text-shadow: 0 0 8px var(--neon-magenta); }
 
+  /* TOXINS GRID */
+  .toxin-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; margin: 24px 0 40px; }
+  .toxin-card {
+    background: rgba(255,51,102,0.05); border: 1px solid rgba(255,51,102,0.2); border-radius: 20px; padding: 24px;
+    text-align: center; transition: all 0.3s ease; backdrop-filter: blur(10px);
+  }
+  .toxin-card:hover { transform: translateY(-4px); background: rgba(255,51,102,0.1); border-color: var(--neon-red); box-shadow: 0 10px 20px rgba(255,51,102,0.2); }
+  .toxin-icon { font-size: 40px; margin-bottom: 12px; }
+  .toxin-name { font-family: 'Montserrat Alternates', sans-serif; font-weight: 800; color: var(--neon-red); margin-bottom: 8px; font-size: 16px; text-shadow: 0 0 8px rgba(255,51,102,0.5);}
+  .toxin-desc { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+
+  /* SPECTRUM CARDS (MOD 2) */
+  .spectrum-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin: 32px 0; }
+  .spectrum-card { border-radius: 24px; padding: 32px; position: relative; overflow: hidden; background: var(--bg-panel); border: 1px solid rgba(255,255,255,0.05); backdrop-filter: blur(10px); }
+  .spectrum-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; }
+  .spectrum-card.uso::before { background: var(--neon-green); box-shadow: 0 0 10px var(--neon-green); }
+  .spectrum-card.abuso::before { background: var(--neon-yellow); box-shadow: 0 0 10px var(--neon-yellow); }
+  .spectrum-card.adiccion::before { background: var(--neon-red); box-shadow: 0 0 10px var(--neon-red); }
+  .spectrum-card.uso:hover { border-color: rgba(0,255,157,0.3); box-shadow: 0 10px 30px var(--neon-green-glow); }
+  .spectrum-card.abuso:hover { border-color: rgba(255,251,0,0.3); box-shadow: 0 10px 30px rgba(255,251,0,0.1); }
+  .spectrum-card.adiccion:hover { border-color: rgba(255,51,102,0.3); box-shadow: 0 10px 30px rgba(255,51,102,0.15); }
+  
+  .spec-title { font-family: 'Montserrat Alternates', sans-serif; font-size: 20px; font-weight: 800; margin-bottom: 16px; display: flex; align-items: center; gap: 10px;}
+  .uso .spec-title { color: var(--neon-green); text-shadow: 0 0 10px var(--neon-green-glow);}
+  .abuso .spec-title { color: var(--neon-yellow); text-shadow: 0 0 10px rgba(255,251,0,0.4);}
+  .adiccion .spec-title { color: var(--neon-red); text-shadow: 0 0 10px rgba(255,51,102,0.4);}
+  .spec-body { font-size: 14px; color: var(--text-muted); }
+  .spec-body ul { padding-left: 20px; margin-top: 12px; }
+  .spec-body li { margin-bottom: 8px; }
+
   /* NEON BANNERS */
   .banner {
     border-radius: 30px; padding: 40px; margin-bottom: 40px; display: flex; gap: 24px; align-items: flex-start;
@@ -288,6 +317,92 @@
   .banner h3 { font-size: 24px; font-weight: 800; margin-bottom: 12px; color: inherit; text-shadow: 0 0 10px currentColor; }
   .banner p { font-size: 16px; color: var(--text-muted); margin-bottom: 12px; }
   .banner p strong { color: var(--white); }
+
+  /* HOTSPOT SECTION */
+  .hotspot-wrap {
+    background: var(--bg-panel); border: 1px solid rgba(255,255,255,0.05); border-radius: 32px;
+    padding: 48px; margin-bottom: 40px; backdrop-filter: blur(16px);
+  }
+  .hotspot-header { text-align: center; margin-bottom: 40px; }
+  .hotspot-header h3 { font-size: 28px; font-weight: 800; margin-bottom: 12px; font-family: 'Montserrat Alternates', sans-serif;}
+  .hotspot-header p { color: var(--text-muted); font-size: 15px; }
+
+  .body-diagram { position: relative; width: 100%; max-width: 500px; margin: 0 auto; user-select: none; }
+  .body-diagram svg { width: 100%; height: auto; display: block; filter: drop-shadow(0 0 20px var(--neon-green-glow)); }
+  
+  .hotspot-point { position: absolute; cursor: pointer; z-index: 10; }
+  .hotspot-dot {
+    width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 800; font-family: 'Montserrat Alternates', sans-serif; transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative;
+    box-shadow: 0 0 15px currentColor;
+  }
+  .hotspot-dot::after {
+    content: ''; position: absolute; inset: -6px; border-radius: 50%; animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+  }
+  .m1 .hotspot-dot { background: var(--neon-green); color: #000; }
+  .m1 .hotspot-dot::after { border: 2px solid var(--neon-green); }
+  .m2 .hotspot-dot { background: var(--neon-cyan); color: #000; }
+  .m2 .hotspot-dot::after { border: 2px solid var(--neon-cyan); }
+
+  @keyframes pulse-ring { 0% { transform: scale(0.8); opacity: 1; } 100% { transform: scale(2.5); opacity: 0; } }
+  .hotspot-point:hover .hotspot-dot, .hotspot-point.active .hotspot-dot { transform: scale(1.2); }
+
+  .hotspot-tooltip {
+    position: absolute; background: rgba(10, 10, 15, 0.95); border: 1px solid var(--glass-border);
+    backdrop-filter: blur(10px); border-radius: 16px; padding: 20px; width: 260px; font-size: 13px;
+    color: var(--text-muted); z-index: 20; pointer-events: none; opacity: 0; transform: translateY(10px) scale(0.95);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    left: 48px; top: -30px; box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+  }
+  .hotspot-tooltip.left { left: auto; right: 48px; }
+  .hotspot-tooltip strong { display: block; margin-bottom: 6px; font-family: 'Montserrat Alternates', sans-serif; font-size: 15px; color: var(--white); }
+  .m1 .hotspot-tooltip strong { color: var(--neon-green); text-shadow: 0 0 5px var(--neon-green-glow);}
+  .m2 .hotspot-tooltip strong { color: var(--neon-cyan); text-shadow: 0 0 5px var(--neon-cyan-glow);}
+
+  .hotspot-point:hover .hotspot-tooltip, .hotspot-point.active .hotspot-tooltip { opacity: 1; transform: translateY(0) scale(1); }
+
+  /* SCREEN DIAGRAM (MOD 2) */
+  .screen-diagram { display: flex; justify-content: center; align-items: flex-start; gap: 40px; flex-wrap: wrap; margin-top: 40px; }
+  .screen-figure { position: relative; width: 240px; filter: drop-shadow(0 0 20px var(--neon-cyan-glow)); }
+  .screen-device { background: linear-gradient(180deg, #101520, #050a10); border: 2px solid rgba(0,229,255,0.4); border-radius: 20px; padding: 16px; position: relative; }
+  .screen-face { background: linear-gradient(135deg, #050a10, #0a1520); border-radius: 10px; height: 130px; display: flex; align-items: center; justify-content: center; font-size: 48px; border: 1px solid rgba(0,229,255,0.2); }
+
+  /* 2x2x2 RULE GRID */
+  .rule-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin: 32px 0; }
+  .rule-item {
+    background: rgba(0,229,255,0.05); border: 1px solid rgba(0,229,255,0.2);
+    border-radius: 24px; padding: 40px 24px; text-align: center; transition: transform 0.3s;
+    backdrop-filter: blur(10px);
+  }
+  .rule-item:hover { transform: translateY(-5px); background: rgba(0,229,255,0.1); border-color: var(--neon-cyan); box-shadow: 0 10px 30px rgba(0,229,255,0.15);}
+  .rule-num { font-family: 'Montserrat Alternates', sans-serif; font-size: 64px; font-weight: 800; color: var(--neon-cyan); line-height: 1; margin-bottom: 16px; text-shadow: 0 0 20px var(--neon-cyan-glow); }
+  .rule-text { font-size: 15px; color: var(--text-muted); line-height: 1.5; }
+
+  /* ALERT GRID */
+  .alert-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; margin-bottom: 40px; }
+  .alert-item {
+    display: flex; gap: 16px; align-items: flex-start; background: rgba(255,51,102,0.05);
+    border: 1px solid rgba(255,51,102,0.2); border-radius: 20px; padding: 24px;
+    font-size: 14px; color: var(--text-muted); transition: all 0.3s;
+  }
+  .alert-item:hover { background: rgba(255,51,102,0.1); border-color: var(--neon-red); box-shadow: 0 5px 20px rgba(255,51,102,0.2); transform: translateX(5px);}
+  .alert-item .ai { font-size: 24px; flex-shrink: 0; }
+
+  /* COMMITMENT */
+  .commitment {
+    border-radius: 32px; padding: 48px; text-align: center; position: relative; overflow: hidden; margin-top: 24px;
+    border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(10px);
+  }
+  .m1 .commitment { background: linear-gradient(135deg, rgba(0,255,157,0.1), transparent); }
+  .m2 .commitment { background: linear-gradient(135deg, rgba(0,229,255,0.1), transparent); }
+  .commitment h3 { font-size: 28px; font-weight: 800; margin-bottom: 16px; font-family: 'Montserrat Alternates', sans-serif;}
+  .m1 .commitment h3 { color: var(--neon-green); text-shadow: 0 0 10px var(--neon-green-glow); }
+  .m2 .commitment h3 { color: var(--neon-cyan); text-shadow: 0 0 10px var(--neon-cyan-glow); }
+  .commitment p { font-size: 16px; color: var(--text-muted); max-width: 600px; margin: 0 auto 32px; }
+  .commitment-items { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
+  .ci { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; border-radius: 100px; font-size: 14px; font-weight: 600; font-family: 'Montserrat Alternates', sans-serif; letter-spacing: 1px;}
+  .m1 .ci { background: rgba(0,255,157,0.1); border: 1px solid var(--neon-green); color: var(--neon-green); box-shadow: 0 0 10px var(--neon-green-glow);}
+  .m2 .ci { background: rgba(0,229,255,0.1); border: 1px solid var(--neon-cyan); color: var(--neon-cyan); box-shadow: 0 0 10px var(--neon-cyan-glow);}
 
   /* ACCORDION */
   .accordion { margin-bottom: 40px; border-radius: 24px; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); background: var(--bg-panel); }
@@ -362,8 +477,9 @@
     .hero h1 { font-size: 42px; }
     .mod-btn { width: 100%; padding: 30px; }
     .content-area { padding: 40px 16px 80px; }
-    .glass-card, .banner, .quiz-wrap { padding: 24px; }
+    .glass-card, .banner, .quiz-wrap, .rule-item, .hotspot-wrap, .commitment { padding: 24px; }
     .nav-wrapper { padding: 10px; }
+    .rule-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -399,7 +515,7 @@
     <div class="btn-title">Uso de Pantallas</div>
     <div class="btn-desc">Estrategias para equilibrar tu tiempo digital y evitar la adicción.</div>
   </button>
-  <!-- M3 (NUEVO) -->
+  <!-- M3 -->
   <button class="mod-btn m3-btn" onclick="showModule('m3', this)">
     <span class="btn-icon">⚡</span>
     <span class="btn-tag">Módulo 3</span>
@@ -408,96 +524,579 @@
   </button>
 </div>
 
-<!-- ===== MÓDULO 1 (Resumen Adaptado a Neón) ===== -->
+<!-- ===== MÓDULO 1 ===== -->
 <div class="content-area m1" id="m1">
-  <button class="close-btn" onclick="closeModule('m1')">← Volver</button>
+  <button class="close-btn" onclick="closeModule('m1')">← Volver a los Módulos</button>
   
   <div class="content-header">
     <div class="content-header-icon">🚭</div>
     <div>
       <h2>Humo y Aerosoles</h2>
-      <p>Información esencial para mantener tus pulmones limpios y liderar con el ejemplo.</p>
+      <p>Información esencial extraída de lineamientos de la OMS, CDC y Secretaría de Salud para estudiantes, padres y comunidad.</p>
     </div>
   </div>
 
   <div class="nav-wrapper" id="nav-m1">
     <span class="section-pill active" onclick="showSection('m1','s1-0', this)">Introducción</span>
-    <span class="section-pill" onclick="showSection('m1','s1-1', this)">Autoevaluación</span>
+    <span class="section-pill" onclick="showSection('m1','s1-1', this)">La Realidad (Cigarrillo vs Vapeo)</span>
+    <span class="section-pill" onclick="showSection('m1','s1-2', this)">Daños a la Salud 🔍</span>
+    <span class="section-pill" onclick="showSection('m1','s1-3', this)">Prevención y Familia</span>
+    <span class="section-pill" onclick="showSection('m1','s1-5', this)">Autoevaluación</span>
   </div>
 
+  <!-- S1-0: INTRO -->
   <div class="section-block visible" id="s1-0">
     <div class="banner m1-theme">
       <div class="banner-icon">💡</div>
       <div class="banner-content">
         <h3>¿Por qué hablamos de esto?</h3>
-        <p>Los espacios libres de humo protegen tu salud. <strong>Decidir no fumar ni vapear es un acto de liderazgo.</strong> Los vapeadores no son inofensivos; contienen metales pesados, saborizantes tóxicos y son una trampa de nicotina.</p>
+        <p>Los espacios libres de humo y aerosoles son fundamentales para proteger la salud de todas las personas, especialmente de los niños y jóvenes. El consumo no solo afecta a quienes lo practican, sino también a quienes están expuestos al humo o vapor de segunda mano.</p>
+        <p>Lo que eliges hoy afecta tu salud y tu futuro. Informarte te ayuda a tomar mejores decisiones. <strong>Decidir no fumar ni vapear es un acto de liderazgo.</strong></p>
       </div>
     </div>
+    
     <div class="cards-grid">
       <div class="glass-card">
         <div class="card-icon">🛡️</div>
-        <div class="card-title">Cuidarte es Prioridad</div>
-        <div class="card-body">Proteger tu salud hoy significa tener más energía, mejor rendimiento académico y una vida más plena.</div>
+        <div class="card-title">Es cuidarte</div>
+        <div class="card-body">Proteger tu salud hoy significa tener más energía, mejor rendimiento académico y una vida más larga y plena.</div>
+      </div>
+      <div class="glass-card">
+        <div class="card-icon">🔭</div>
+        <div class="card-title">Pensar a largo plazo</div>
+        <div class="card-body">Las decisiones que tomas ahora tienen consecuencias en tu futuro. La dependencia y las enfermedades crónicas pueden gestarse desde joven.</div>
+      </div>
+      <div class="glass-card">
+        <div class="card-icon">🌟</div>
+        <div class="card-title">Dar buen ejemplo</div>
+        <div class="card-body">Tu actitud influye en las personas que te rodean. Ser un referente positivo es una forma de liderazgo real frente a presiones sociales.</div>
       </div>
     </div>
   </div>
 
+  <!-- S1-1: LA REALIDAD -->
   <div class="section-block" id="s1-1">
-    <div class="quiz-wrap">
-      <div class="quiz-question">¿El vapeador sirve para dejar de fumar?</div>
-      <div class="quiz-options">
-        <div class="quiz-opt wrong">Sí, es 100% recomendado.</div>
-        <div class="quiz-opt correct">Falso. Aumenta drásticamente la probabilidad de fumar.</div>
+    <div class="banner m1-theme">
+      <div class="banner-icon">🚬</div>
+      <div class="banner-content">
+        <h3>¿Qué es el cigarrillo tradicional?</h3>
+        <p>Contiene nicotina (sustancia altamente adictiva) y <strong>tiene más de 7.000 químicos dañinos</strong>. Afecta todos los órganos del cuerpo, no relaja y definitivamente no es inofensivo. La adicción puede comenzar desde la primera vez que se consume.</p>
       </div>
-      <div class="quiz-feedback show ok" style="margin-top:20px;">
-        <strong>¡Correcto!</strong> Es una puerta de entrada a la adicción.
+    </div>
+
+    <div class="banner m1-theme" style="margin-top: 24px;">
+      <div class="banner-icon">💨</div>
+      <div class="banner-content">
+        <h3>Sistemas Electrónicos (Vapeadores)</h3>
+        <p>Los Sistemas Electrónicos de Administración de Nicotina (SEAN) y sin Nicotina (SSSN) se componen de un mecanismo electrónico, una batería y cartuchos. <strong>No son seguros:</strong> producen un aerosol con partículas ultrafinas, saborizantes disueltos en propilenglicol y glicerina, liberando metales y tóxicos que dañan severamente el cuerpo.</p>
+      </div>
+    </div>
+
+    <h3 class="font-syne" style="font-size:24px; font-weight:800; margin: 48px 0 24px; color: var(--white);">¿Qué hay en el aerosol? (Tóxicos comprobados)</h3>
+    <div class="toxin-grid">
+      <div class="toxin-card">
+        <div class="toxin-icon">🔥</div>
+        <div class="toxin-name">Dimetil Éter</div>
+        <div class="toxin-desc">Sustancia altamente inflamable detectada en el aerosol exhalado.</div>
+      </div>
+      <div class="toxin-card">
+        <div class="toxin-icon">🪳</div>
+        <div class="toxin-name">Linalol</div>
+        <div class="toxin-desc">Químico utilizado comúnmente como insecticida contra moscas y cucarachas.</div>
+      </div>
+      <div class="toxin-card">
+        <div class="toxin-icon">🧼</div>
+        <div class="toxin-name">Alcohol Bencílico</div>
+        <div class="toxin-desc">Utilizado en muchos tipos de jabones, cremas y productos de limpieza industrial.</div>
+      </div>
+      <div class="toxin-card">
+        <div class="toxin-icon">🍿</div>
+        <div class="toxin-name">Diacetil y Acroleína</div>
+        <div class="toxin-desc">Saborizantes y químicos reconocidos por causar daños pulmonares irreversibles y cáncer.</div>
+      </div>
+    </div>
+
+    <div class="banner danger">
+      <div class="banner-icon">🚫</div>
+      <div class="banner-content">
+        <h3>Mito: "Sirven para dejar de fumar"</h3>
+        <p><strong>FALSO.</strong> Una estrategia de las industrias es hacer creer engañosamente que son alternativas para la "cesación". Su eficacia NO ha sido comprobada por ciencia independiente ni avalada por la OMS. De hecho, los jóvenes que inician con vapeadores <strong>aumentan de 2 a 4 veces sus probabilidades de fumar cigarrillos combustibles</strong>, siendo una puerta de entrada a la adicción.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- S1-2: DAÑOS A LA SALUD -->
+  <div class="section-block" id="s1-2">
+    <div class="hotspot-wrap">
+      <div class="hotspot-header">
+        <h3>Daños en el Cuerpo Humano</h3>
+        <p>Interactúa con los puntos para ver los efectos médicos del humo y los aerosoles.</p>
+      </div>
+      <div class="body-diagram">
+        <svg viewBox="0 0 300 520" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="150" cy="58" r="44" fill="rgba(255,255,255,0.02)" stroke="var(--neon-green)" stroke-width="1.5" stroke-opacity="0.5"/>
+          <rect x="136" y="98" width="28" height="30" rx="4" fill="rgba(255,255,255,0.02)" stroke="var(--neon-green)" stroke-width="1.5" stroke-opacity="0.5"/>
+          <rect x="90" y="124" width="120" height="150" rx="14" fill="rgba(255,255,255,0.02)" stroke="var(--neon-green)" stroke-width="1.5" stroke-opacity="0.5"/>
+          <rect x="50" y="124" width="36" height="130" rx="18" fill="rgba(255,255,255,0.02)" stroke="var(--neon-green)" stroke-width="1.5" stroke-opacity="0.5"/>
+          <rect x="214" y="124" width="36" height="130" rx="18" fill="rgba(255,255,255,0.02)" stroke="var(--neon-green)" stroke-width="1.5" stroke-opacity="0.5"/>
+          <rect x="97" y="270" width="48" height="180" rx="24" fill="rgba(255,255,255,0.02)" stroke="var(--neon-green)" stroke-width="1.5" stroke-opacity="0.5"/>
+          <rect x="155" y="270" width="48" height="180" rx="24" fill="rgba(255,255,255,0.02)" stroke="var(--neon-green)" stroke-width="1.5" stroke-opacity="0.5"/>
+          <circle cx="135" cy="52" r="4" fill="var(--neon-green)" opacity="0.8"/>
+          <circle cx="165" cy="52" r="4" fill="var(--neon-green)" opacity="0.8"/>
+        </svg>
+        
+        <div class="hotspot-point" style="top:6%;left:60%;">
+          <div class="hotspot-dot">1</div>
+          <div class="hotspot-tooltip left">
+            <strong>Cerebro y Concentración</strong>
+            En jóvenes, la nicotina afecta adversamente el desarrollo cerebral, generando dificultades en la memoria, la atención y el aprendizaje.
+          </div>
+        </div>
+        <div class="hotspot-point" style="top:12%;left:62%;">
+          <div class="hotspot-dot">2</div>
+          <div class="hotspot-tooltip left">
+            <strong>Garganta y Boca</strong>
+            Irritación inmediata, tos, mal aliento y aumento significativo en el riesgo de cáncer oral.
+          </div>
+        </div>
+        <div class="hotspot-point" style="top:28%;left:65%;">
+          <div class="hotspot-dot">3</div>
+          <div class="hotspot-tooltip">
+            <strong>Daño Pulmonar (Respiratorio)</strong>
+            Asma, bronquitis crónica, inflamación del tejido pulmonar, opacidades bilaterales y baja oxigenación por el vapor a altas temperaturas.
+          </div>
+        </div>
+        <div class="hotspot-point" style="top:31%;left:22%;">
+          <div class="hotspot-dot">4</div>
+          <div class="hotspot-tooltip left">
+            <strong>Corazón (Cardiovascular)</strong>
+            Aumenta el ritmo cardíaco y la presión arterial. Contrae los vasos sanguíneos y puede casi duplicar el riesgo de ataque cardíaco. Exacerba la disfunción endotelial.
+          </div>
+        </div>
+        <div class="hotspot-point" style="top:48%;left:60%;">
+          <div class="hotspot-dot">5</div>
+          <div class="hotspot-tooltip">
+            <strong>Embarazo y Desarrollo</strong>
+            En mujeres embarazadas, fumar o exponerse al humo puede causar bajo peso al nacer, parto prematuro y problemas graves en el desarrollo del bebé.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="font-syne" style="font-size:24px; font-weight:800; margin: 40px 0 24px; color: var(--white);">Clasificación Médica de Daños</h3>
+    <div class="cards-grid">
+      <div class="glass-card">
+        <div class="card-icon">⚕️</div>
+        <div class="card-title">Daños Respiratorios</div>
+        <div class="card-body">
+          <ul>
+            <li>Tos, fatiga crónica y dolor en el pecho.</li>
+            <li>Inflamación severa de vías respiratorias.</li>
+            <li>Riesgo de desarrollar enfermedades pulmonares graves no vistas hasta ahora en fumadores comunes.</li>
+            <li>Bajo rendimiento físico y académico.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="glass-card">
+        <div class="card-icon">🩸</div>
+        <div class="card-title">Daños Cardiovasculares</div>
+        <div class="card-body">
+          <ul>
+            <li>Cambios adversos en la circulación sanguínea.</li>
+            <li>Aumento de probabilidades de sufrir infarto de miocardio y accidente cerebrovascular.</li>
+            <li>Infecciones recurrentes.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="glass-card">
+        <div class="card-icon">🧬</div>
+        <div class="card-title">Daños Mutagénicos</div>
+        <div class="card-body">
+          <ul>
+            <li>Exposición a compuestos como las nitrosaminas y formaldehído aumentan el riesgo de múltiples tipos de cáncer.</li>
+            <li>Alteraciones a la estructura genética y nivel reproductivo.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S1-3: PREVENCION Y FAMILIA -->
+  <div class="section-block" id="s1-3">
+    <div class="banner m1-theme">
+      <div class="banner-icon">👨‍👩‍👧</div>
+      <div class="banner-content">
+        <h3>El rol de los padres y la familia</h3>
+        <p>Los padres juegan un papel crucial en la prevención. Los hijos aprenden con el ejemplo. Un hogar libre de humo protege la salud física y emocional y previene la exposición pasiva que causa infecciones y problemas cardíacos en no fumadores.</p>
+      </div>
+    </div>
+
+    <h3 class="font-syne" style="font-size:24px; font-weight:800; margin: 40px 0 24px; color: var(--white);">Estrategias y Leyes de Prevención</h3>
+    <div class="accordion">
+      <div class="acc-item">
+        <button class="acc-header" onclick="toggleAccordion(this)">
+          Estrategias recomendadas (OMS y CDC) <span class="acc-icon">▼</span>
+        </button>
+        <div class="acc-body">
+          <p>Las organizaciones internacionales recomiendan para prevenir el consumo, especialmente en jóvenes:</p>
+          <ul>
+            <li>Hablar abiertamente con los hijos sobre los riesgos, adaptando el mensaje a su edad.</li>
+            <li>Establecer reglas claras en el hogar sobre no fumar ni vapear.</li>
+            <li>Ser un buen ejemplo evitando el consumo de tabaco y vapeo.</li>
+            <li>Fomentar actividades saludables y alternativas para manejar el estrés.</li>
+            <li>Participar en programas escolares y comunitarios de prevención.</li>
+            <li>Limitar la exposición a publicidad y entornos que promuevan el consumo.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-header" onclick="toggleAccordion(this)">
+          Estrategias directas para la familia <span class="acc-icon">▼</span>
+        </button>
+        <div class="acc-body">
+          <ul>
+            <li>Mantener un hogar 100% libre de humo y aerosoles.</li>
+            <li>Dialogar con los hijos sobre los riesgos y las consecuencias del consumo (incluyendo los engaños de la industria).</li>
+            <li>Promover hábitos saludables y actividades recreativas.</li>
+            <li>Informarse y utilizar recursos educativos y de apoyo.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-header" onclick="toggleAccordion(this)">
+          Derecho a la Salud y Orden Público <span class="acc-icon">▼</span>
+        </button>
+        <div class="acc-body">
+          <p>La prohibición de la importación y venta de estos productos responde a:</p>
+          <ul>
+            <li><strong>Artículo 4° Constitucional:</strong> Toda persona tiene derecho a la protección de la salud y a un medio ambiente sano.</li>
+            <li><strong>Interés Superior:</strong> Proteger a los individuos de sustancias tóxicas y salvaguardar a terceros de las emisiones.</li>
+            <li><strong>Prevención estatal:</strong> Evitar que aumenten las enfermedades atribuibles al tabaquismo.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="commitment m1">
+      <h3>🤝 Compromiso Familiar: "El Ejemplo Cuenta"</h3>
+      <p>Reflexionemos: ¿Qué hábitos saludables promovemos en casa? ¿Cómo influye nuestro ejemplo en nuestros hijos? ¿Qué cambios podemos hacer desde hoy?</p>
+      <div class="commitment-items">
+        <span class="ci">Hogar 100% libre de humo y aerosoles</span>
+        <span class="ci">Dialogar abierta y honestamente</span>
+        <span class="ci">Promover actividades saludables juntos</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- S1-5: QUIZ M1 COMPLETO -->
+  <div class="section-block" id="s1-5">
+    <div class="quiz-wrap">
+      <div id="quiz1-container">
+        <div class="quiz-question" id="q1-text"></div>
+        <div class="quiz-options" id="q1-opts"></div>
+        <div class="quiz-feedback" id="q1-feedback"></div>
+        <div class="quiz-nav">
+          <span class="quiz-progress" id="q1-progress"></span>
+          <button class="btn-quiz" id="q1-next" onclick="nextQ1()" style="display:none">Siguiente Pregunta →</button>
+        </div>
+      </div>
+      <div id="quiz1-result" style="display:none; text-align:center;">
+        <div style="font-size:72px; margin-bottom:20px; animation: floatIcon 2s infinite;" id="quiz1-emoji"></div>
+        <div style="font-family:'Montserrat Alternates',sans-serif; font-size:36px; font-weight:800; margin-bottom:16px; color:var(--neon-green); text-shadow: 0 0 20px var(--neon-green-glow);" id="quiz1-score"></div>
+        <div style="color:var(--text-muted); font-size:18px; margin-bottom:40px; max-width: 500px; margin-inline: auto;" id="quiz1-msg"></div>
+        <button class="btn-quiz" onclick="resetQ1()">Intentar de nuevo</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ===== MÓDULO 2 (Resumen Adaptado a Neón) ===== -->
+<!-- ===== MÓDULO 2 ===== -->
 <div class="content-area m2" id="m2">
-  <button class="close-btn" onclick="closeModule('m2')">← Volver</button>
+  <button class="close-btn" onclick="closeModule('m2')">← Volver a los Módulos</button>
   
   <div class="content-header">
     <div class="content-header-icon">📱</div>
     <div>
       <h2>Uso Responsable de Pantallas</h2>
-      <p>Aprende a equilibrar tu tiempo digital y aplicar la Regla 2x2x2.</p>
+      <p>Aprende a equilibrar tu tiempo digital, identificar riesgos físicos, emocionales y sociales, y aplicar la Regla 2x2x2 para proteger tu salud integral.</p>
     </div>
   </div>
 
   <div class="nav-wrapper" id="nav-m2">
-    <span class="section-pill active" onclick="showSection('m2','s2-0', this)">El Espectro</span>
-    <span class="section-pill" onclick="showSection('m2','s2-1', this)">Autoevaluación</span>
+    <span class="section-pill active" onclick="showSection('m2','s2-0', this)">Introducción y Espectro</span>
+    <span class="section-pill" onclick="showSection('m2','s2-1', this)">Riesgos a la Salud 🔍</span>
+    <span class="section-pill" onclick="showSection('m2','s2-2', this)">Estrategias y Regla 2x2x2</span>
+    <span class="section-pill" onclick="showSection('m2','s2-3', this)">Alertas y Beneficios</span>
+    <span class="section-pill" onclick="showSection('m2','s2-5', this)">Autoevaluación</span>
   </div>
 
+  <!-- S2-0: INTRO Y ESPECTRO -->
   <div class="section-block visible" id="s2-0">
     <div class="banner m2-theme">
-      <div class="banner-icon">📐</div>
+      <div class="banner-icon">🧠</div>
       <div class="banner-content">
-        <h3>La Regla 2 × 2 × 2</h3>
-        <p><strong>2 horas</strong> máximo de ocio digital al día.<br><strong>20 segundos</strong> mirando a lo lejos cada 20 min.<br><strong>2 horas</strong> sin pantallas antes de dormir.</p>
+        <h3>Adicciones no químicas y Reeducación</h3>
+        <p>Aunque las pantallas son herramientas útiles, su uso excesivo genera efectos negativos. El término "adicción" solemos asociarlo a químicos (alcohol, drogas), pero existen <strong>adicciones no químicas o psicológicas</strong> asociadas a conductas excesivas (videojuegos, redes sociales).</p>
+        <p style="margin-top:8px;"><strong>El objetivo:</strong> El trabajo de reeducación de conductas nocivas no es prohibir la tecnología, sino centrarse en <strong>cambiar los hábitos de uso, manejar la ansiedad y controlar los impulsos</strong> adoptando el autocuidado.</p>
+      </div>
+    </div>
+
+    <h3 class="font-syne" style="font-size:24px; font-weight:800; margin: 48px 0 24px; color: var(--white);">El Espectro de Conductas Digitales</h3>
+    <div class="spectrum-grid">
+      <div class="spectrum-card uso">
+        <div class="spec-title">🟢 USO</div>
+        <div class="spec-body">
+          <p><strong>Conducta normal y saludable. Un usuario capaz de:</strong></p>
+          <ul>
+            <li>Controlar el tiempo de conexión y exposición.</li>
+            <li>Dar prioridad a las actividades escolares, sociales y académicas por sobre el juego online.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="spectrum-card abuso">
+        <div class="spec-title">🟡 ABUSO</div>
+        <div class="spec-body">
+          <p><strong>Uso excesivo que afecta la calidad de vida:</strong></p>
+          <ul>
+            <li>Cambio negativo en hábitos de sueño y alimentación.</li>
+            <li>Alteraciones en la concentración.</li>
+            <li>Estados ansiosos e <strong>irritabilidad extrema</strong> cuando se le pide desconectarse.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="spectrum-card adiccion">
+        <div class="spec-title">🔴 ADICCIÓN</div>
+        <div class="spec-body">
+          <p><strong>Problema severo con 3 elementos claves:</strong></p>
+          <ul>
+            <li><strong>Incapacidad de autocontrol:</strong> No puede dejar de jugar a pesar de intentarlo.</li>
+            <li><strong>Dependencia psicológica:</strong> Deseo incontrolable, pensamientos obsesivos.</li>
+            <li><strong>Daños sociales:</strong> Conflictos familiares, pérdida de amistades, sentimientos de culpa/angustia.</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
 
+  <!-- S2-1: RIESGOS HOTSPOT -->
   <div class="section-block" id="s2-1">
-    <div class="quiz-wrap">
-      <div class="quiz-question">¿Qué es una señal de abuso tecnológico?</div>
-      <div class="quiz-options">
-        <div class="quiz-opt wrong">Usarlo para hacer tareas escolares.</div>
-        <div class="quiz-opt correct">Irritabilidad aguda al desconectarse y pérdida de sueño.</div>
+    <div class="hotspot-wrap">
+      <div class="hotspot-header">
+        <h3>Impacto del Uso Excesivo</h3>
+        <p>Toca cada punto en los dispositivos para explorar los riesgos asociados.</p>
       </div>
-      <div class="quiz-feedback show ok" style="margin-top:20px;">
-        <strong>¡Correcto!</strong> La alteración del humor es una señal clara de alerta.
+      <div class="screen-diagram">
+        <!-- Phone diagram -->
+        <div class="screen-figure">
+          <div class="screen-device">
+            <div class="screen-face">📱</div>
+            <div class="hotspot-point" style="top:-8px; left:50%; transform:translateX(-50%);">
+              <div class="hotspot-dot">A</div>
+              <div class="hotspot-tooltip left" style="left:40px; top:-10px;">
+                <strong>Fatiga visual y ocular</strong>
+                Genera sequedad, dolores de cabeza y visión borrosa por la exposición constante sin descanso.
+              </div>
+            </div>
+            <div class="hotspot-point" style="top:50px; right:-12px;">
+              <div class="hotspot-dot">B</div>
+              <div class="hotspot-tooltip left">
+                <strong>Mala postura</strong>
+                El dolor de cuello (cuello de texto) y espalda son comunes por inclinarse horas sobre el dispositivo.
+              </div>
+            </div>
+            <div class="hotspot-point" style="bottom:20px; left:-12px;">
+              <div class="hotspot-dot">C</div>
+              <div class="hotspot-tooltip">
+                <strong>Emocional: Ansiedad</strong>
+                Ansiedad y estrés por la sobreexposición, la comparación social y la baja autoestima al ver vidas irreales.
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Laptop diagram -->
+        <div class="screen-figure" style="width:280px;">
+          <div style="position:relative;">
+            <div class="screen-device" style="border-radius:12px 12px 0 0;">
+              <div class="screen-face" style="height:110px;">💻</div>
+              <div class="hotspot-point" style="top:10px; right:-12px;">
+                <div class="hotspot-dot">D</div>
+                <div class="hotspot-tooltip left">
+                  <strong>Alteraciones del Sueño</strong>
+                  La luz azul inhibe la melatonina, causando problemas severos para dormir y descansar.
+                </div>
+              </div>
+              <div class="hotspot-point" style="top:60px; left:-12px;">
+                <div class="hotspot-dot">E</div>
+                <div class="hotspot-tooltip">
+                  <strong>Sedentarismo</strong>
+                  Largas horas sentado aumentan significativamente el riesgo de sobrepeso y enfermedades metabólicas.
+                </div>
+              </div>
+            </div>
+            <div style="height:12px; background:linear-gradient(90deg,#0a1520,#102030,#0a1520); border-radius:0 0 4px 4px; border: 2px solid rgba(0,229,255,0.4); border-top: none;"></div>
+            <div class="hotspot-point" style="bottom:-5px; right:-6px;">
+              <div class="hotspot-dot">F</div>
+              <div class="hotspot-tooltip left">
+                <strong>Social: Aislamiento</strong>
+                Distracción en clases, dificultad para comunicarse cara a cara y aislamiento de la familia y amigos.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="font-syne" style="font-size:24px; font-weight:800; margin: 40px 0 24px; color: var(--white);">Resumen de Riesgos</h3>
+    <div class="cards-grid">
+      <div class="glass-card">
+        <div class="card-icon">🏃</div>
+        <div class="card-title">Problemas Físicos</div>
+        <div class="card-body"><ul><li>Fatiga visual y sequedad ocular.</li><li>Dolores de cabeza, cuello y espalda (mala postura).</li><li>Alteraciones del sueño por exposición a luz azul.</li><li>Sedentarismo y aumento de riesgo de sobrepeso.</li></ul></div>
+      </div>
+      <div class="glass-card">
+        <div class="card-icon">😰</div>
+        <div class="card-title">Emocionales y Mentales</div>
+        <div class="card-body"><ul><li>Ansiedad y estrés por redes sociales.</li><li>Dificultad para concentrarse.</li><li>Irritabilidad o dependencia al dispositivo.</li><li>Comparación social y baja autoestima.</li></ul></div>
+      </div>
+      <div class="glass-card">
+        <div class="card-icon">🧍</div>
+        <div class="card-title">Problemas Sociales</div>
+        <div class="card-body"><ul><li>Aislamiento de la familia o amigos físicos.</li><li>Dificultad para comunicarse cara a cara.</li><li>Distracción en clases o actividades importantes.</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S2-2: REGLA 2X2X2 Y ESTRATEGIAS -->
+  <div class="section-block" id="s2-2">
+    <div class="banner m2-theme">
+      <div class="banner-icon">📐</div>
+      <div class="banner-content">
+        <h3>La Regla 2 × 2 × 2</h3>
+        <p>Una estrategia recomendada por profesionales para gestionar el tiempo de pantalla y proteger la vista y la mente de forma simple.</p>
+      </div>
+    </div>
+    
+    <div class="rule-grid">
+      <div class="rule-item">
+        <div class="rule-num">2</div>
+        <div class="rule-text">horas <strong>máximo de ocio digital</strong> al día (ideal 45-60 min para menores).</div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-num">20</div>
+        <div class="rule-text">segundos de descanso mirando a lo lejos (6m) cada <strong>20 minutos</strong>.</div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-num">2h</div>
+        <div class="rule-text"><strong>antes de dormir</strong>: evitar por completo las pantallas (protege la melatonina).</div>
+      </div>
+    </div>
+
+    <h3 class="font-syne" style="font-size:24px; font-weight:800; margin: 40px 0 24px; color: var(--white);">Estrategias para un uso responsable</h3>
+    <div class="accordion">
+      <div class="acc-item">
+        <button class="acc-header" onclick="toggleAccordion(this)">
+          A. Límites y Tiempos <span class="acc-icon">▼</span>
+        </button>
+        <div class="acc-body">
+          <ul>
+            <li>Los tiempos de conexión al ocio deben ser acotados a 45-60 minutos al día. Al hacer tareas, se suma un tiempo extra.</li>
+            <li>Usar aplicaciones de control de tiempo si es necesario.</li>
+            <li>Evitar pantallas mientras se come.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-header" onclick="toggleAccordion(this)">
+          B. Rutinas Saludables y Postura <span class="acc-icon">▼</span>
+        </button>
+        <div class="acc-body">
+          <ul>
+            <li><strong>Privilegiar las actividades al aire libre</strong>, deporte y lectura por sobre lo digital.</li>
+            <li>Mantener horarios regulares de estudio y descanso.</li>
+            <li>Pantalla a la altura de los ojos, espalda recta y pies apoyados.</li>
+            <li>Ajustar brillo y tamaño de letra, usando luz ambiental adecuada.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-header" onclick="toggleAccordion(this)">
+          C. Entorno, Familia y Crítica <span class="acc-icon">▼</span>
+        </button>
+        <div class="acc-body">
+          <ul>
+            <li><strong>Acuerdos con otras familias:</strong> Organizar los tiempos de conexión de los amigos para evitar presión social.</li>
+            <li>Permitir el acceso según la <strong>edad y real necesidad</strong>.</li>
+            <li>Fomentar pensamiento crítico: identificar información falsa y evitar compararse con imágenes irreales.</li>
+            <li>Establecer normas claras en casa y conversar sobre ciberacoso y privacidad.</li>
+            <li>Educar en la libertad para que aprendan a elegir lo bueno para ellos.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S2-3: ALERTAS Y BENEFICIOS -->
+  <div class="section-block" id="s2-3">
+    <div class="banner danger">
+      <div class="banner-icon">⚠️</div>
+      <div class="banner-content">
+        <h3>Señales de alerta de uso problemático</h3>
+        <p>Si identificas varias de estas señales, la conducta digital está pasando de "Uso" a "Abuso" o "Adicción", requiriendo reeducación o ayuda profesional.</p>
+      </div>
+    </div>
+
+    <div class="alert-grid">
+      <div class="alert-item"><span class="ai">😤</span><div>Irritabilidad aguda o mal humor cuando no se puede usar el dispositivo o se pide la desconexión.</div></div>
+      <div class="alert-item"><span class="ai">📚</span><div>Descuidar tareas escolares o responsabilidades por focalizarse solo en la pantalla.</div></div>
+      <div class="alert-item"><span class="ai">🌙</span><div>Dormir menos horas por estar conectado, alterando ritmos biológicos.</div></div>
+      <div class="alert-item"><span class="ai">🧍</span><div>Aislamiento social, pérdida de amistades reales e interés nulo en actividades fuera de pantalla.</div></div>
+      <div class="alert-item"><span class="ai">🤫</span><div>Uso secreto o a escondidas de los dispositivos.</div></div>
+    </div>
+
+    <div class="commitment m2">
+      <h3>🌟 Beneficios del uso equilibrado</h3>
+      <p>Lograr un balance digital no solo previene enfermedades, sino que mejora activamente nuestra vida en múltiples aspectos:</p>
+      <div class="commitment-items">
+        <span class="ci">Mejor concentración académica</span>
+        <span class="ci">Sueño reparador</span>
+        <span class="ci">Relaciones sociales fuertes</span>
+        <span class="ci">Mayor creatividad y productividad</span>
+      </div>
+    </div>
+    
+    <!-- Enlaces -->
+    <div class="glass-card" style="margin-top: 24px; padding: 24px; text-align:center;">
+      <p style="font-family:'Montserrat Alternates',sans-serif; font-weight:700; margin-bottom:12px; color:var(--neon-cyan);">Recursos de apoyo: Convivencia Digital y Autocuidado</p>
+      <div style="display:flex; justify-content:center; gap:20px; flex-wrap:wrap;">
+        <a href="http://www.protecciononline.com/" target="_blank" style="color:var(--text-muted); text-decoration:none; border:1px solid rgba(255,255,255,0.1); padding:10px 20px; border-radius:100px; font-size:14px; transition:all 0.3s; background: rgba(255,255,255,0.02);">Protección Online</a>
+        <a href="https://www.commonsensemedia.org/espanol/blog" target="_blank" style="color:var(--text-muted); text-decoration:none; border:1px solid rgba(255,255,255,0.1); padding:10px 20px; border-radius:100px; font-size:14px; transition:all 0.3s; background: rgba(255,255,255,0.02);">Common Sense Media</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- S2-5: QUIZ M2 COMPLETO -->
+  <div class="section-block" id="s2-5">
+    <div class="quiz-wrap">
+      <div id="quiz2-container">
+        <div class="quiz-question" id="q2-text"></div>
+        <div class="quiz-options" id="q2-opts"></div>
+        <div class="quiz-feedback" id="q2-feedback"></div>
+        <div class="quiz-nav">
+          <span class="quiz-progress" id="q2-progress"></span>
+          <button class="btn-quiz" id="q2-next" onclick="nextQ2()" style="display:none">Siguiente Pregunta →</button>
+        </div>
+      </div>
+      <div id="quiz2-result" style="display:none; text-align:center;">
+        <div style="font-size:72px; margin-bottom:20px; animation: floatIcon 2s infinite;" id="quiz2-emoji"></div>
+        <div style="font-family:'Montserrat Alternates',sans-serif; font-size:36px; font-weight:800; margin-bottom:16px; color:var(--neon-cyan); text-shadow: 0 0 20px var(--neon-cyan-glow);" id="quiz2-score"></div>
+        <div style="color:var(--text-muted); font-size:18px; margin-bottom:40px; max-width: 500px; margin-inline: auto;" id="quiz2-msg"></div>
+        <button class="btn-quiz" onclick="resetQ2()">Intentar de nuevo</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ===== MÓDULO 3 (NUEVO: ALCOHOL Y ENERGIZANTES) ===== -->
+<!-- ===== MÓDULO 3 (ALCOHOL Y ENERGIZANTES) ===== -->
 <div class="content-area m3" id="m3">
   <button class="close-btn" onclick="closeModule('m3')">← Volver a los Módulos</button>
   
@@ -783,6 +1382,166 @@ function toggleAccordion(btn) {
   item.classList.toggle('active');
 }
 
+// ====== TOUCH HOTSPOTS ======
+document.querySelectorAll('.hotspot-point').forEach(pt => {
+  pt.addEventListener('click', (e) => {
+    // Only remove active if clicking another one
+    const wasActive = pt.classList.contains('active');
+    document.querySelectorAll('.hotspot-point').forEach(p => p.classList.remove('active'));
+    if (!wasActive) pt.classList.add('active');
+    e.stopPropagation();
+  });
+});
+
+// Click outside to close hotspots
+document.addEventListener('click', () => {
+  document.querySelectorAll('.hotspot-point').forEach(p => p.classList.remove('active'));
+});
+
+// ====== QUIZ 1 (MÓDULO 1) ======
+const quiz1 = [
+  { q: "El cigarrillo y el vapeador contienen miles de químicos. ¿Cuál de estos tóxicos se utiliza como insecticida?", opts: ["Dimetil éter","Diacetil","Linalol","Acroleína"], ans: 2, exp: "Correcto. El Linalol es un químico usado comúnmente como insecticida y está presente en estos productos." },
+  { q: "¿Es el vapeador una alternativa recomendada por la OMS para dejar de fumar?", opts: ["Sí, si no tiene nicotina.","Falso. Aumenta de 2 a 4 veces la probabilidad de fumar cigarrillos comunes.","Sí, porque el vapor es inofensivo.","Depende del sabor."], ans: 1, exp: "Falso. Su eficacia no está comprobada y es una puerta de entrada a la adicción, aumentando drásticamente la probabilidad de fumar." },
+  { q: "¿Cuál de estos es un Daño Mutagénico causado por el humo y aerosoles?", opts: ["Asma severa.","Aumento de presión arterial.","Alteraciones a la estructura genética y aumento de riesgo de cáncer.","Mala postura."], ans: 2, exp: "Exacto. Compuestos como las nitrosaminas dañan la estructura genética (mutagénico), aumentando el riesgo de cáncer y daños reproductivos." },
+  { q: "¿Por qué el consumo afecta también a mujeres embarazadas y sus bebés?", opts: ["Solo afecta si fuman diariamente.","Causa irritación ocular en el bebé.","Puede causar bajo peso al nacer, parto prematuro y problemas de desarrollo.","No los afecta si es vapeador."], ans: 2, exp: "La exposición, incluso pasiva, afecta gravemente el desarrollo del feto, causando bajo peso y partos prematuros." },
+  { q: "¿Qué avala la prohibición de estos productos en espacios libres de humo?", opts: ["Una sugerencia escolar.","El Artículo 4° Constitucional, que protege el derecho a la salud y un medio ambiente sano.","Una regla de las empresas tabacaleras.","El capricho de algunos adultos."], ans: 1, exp: "El Artículo 4° Constitucional y el interés superior de salud justifican las prohibiciones legales de los SEAN y SSSN." },
+];
+
+let q1i = 0, q1score = 0;
+
+function loadQ1() {
+  const q = quiz1[q1i];
+  document.getElementById('q1-text').textContent = `${q1i+1}. ${q.q}`;
+  document.getElementById('q1-progress').textContent = `PREGUNTA ${q1i+1} DE ${quiz1.length}`;
+  const opts = document.getElementById('q1-opts');
+  opts.innerHTML = '';
+  q.opts.forEach((o, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'quiz-opt';
+    btn.textContent = o;
+    btn.onclick = () => selectQ1(i);
+    opts.appendChild(btn);
+  });
+  document.getElementById('q1-feedback').className = 'quiz-feedback';
+  document.getElementById('q1-next').style.display = 'none';
+}
+
+function selectQ1(i) {
+  const q = quiz1[q1i];
+  const opts = document.querySelectorAll('#q1-opts .quiz-opt');
+  opts.forEach(o => o.onclick = null);
+  const fb = document.getElementById('q1-feedback');
+  
+  if (i === q.ans) {
+    opts[i].classList.add('correct');
+    q1score++;
+    fb.className = 'quiz-feedback show ok';
+    fb.innerHTML = `<strong>¡Correcto!</strong><br>${q.exp}`;
+  } else {
+    opts[i].classList.add('wrong');
+    opts[q.ans].classList.add('correct');
+    fb.className = 'quiz-feedback show fail';
+    fb.innerHTML = `<strong>Incorrecto</strong><br>${q.exp}`;
+  }
+  const nextBtn = document.getElementById('q1-next');
+  nextBtn.style.display = 'block';
+  nextBtn.textContent = q1i < quiz1.length - 1 ? 'Siguiente Pregunta →' : 'Ver Resultados Completos';
+}
+
+function nextQ1() {
+  q1i++;
+  if (q1i >= quiz1.length) { showQ1Result(); return; }
+  loadQ1();
+}
+
+function showQ1Result() {
+  document.getElementById('quiz1-container').style.display = 'none';
+  document.getElementById('quiz1-result').style.display = 'block';
+  const pct = q1score / quiz1.length;
+  document.getElementById('quiz1-emoji').textContent = pct >= 0.8 ? '🏆' : pct >= 0.6 ? '👍' : '📖';
+  document.getElementById('quiz1-score').textContent = `${q1score} / ${quiz1.length} Correctas`;
+  document.getElementById('quiz1-msg').textContent = pct >= 0.8 ? '¡Excelente! Dominas a la perfección los riesgos reales y las estrategias de prevención del tabaquismo.' : pct >= 0.6 ? 'Buen trabajo. Tienes bases sólidas, repasa algunas secciones para lograr la excelencia.' : 'Te recomendamos revisar el material y las secciones desplegables nuevamente. ¡El conocimiento es prevención!';
+}
+
+function resetQ1() {
+  q1i = 0; q1score = 0;
+  document.getElementById('quiz1-container').style.display = 'block';
+  document.getElementById('quiz1-result').style.display = 'none';
+  loadQ1();
+}
+
+// ====== QUIZ 2 (MÓDULO 2) ======
+const quiz2 = [
+  { q: "El término 'Adicción' en el uso de pantallas no es químico, sino psicológico. ¿Cuáles son sus 3 elementos claves?", opts: ["Jugar, perder y ganar.","Incapacidad de autocontrol, dependencia psicológica y efectos dañinos sociales.","Celulares, tabletas y consolas.","Falta de sueño, mala postura y sedentarismo."], ans: 1, exp: "La adicción se define por la pérdida de control, la obsesión (dependencia) y el daño en las relaciones o vida social." },
+  { q: "¿En qué consiste la regla del '20' en la estrategia 2x2x2?", opts: ["Jugar solo 20 minutos al día.","Tener la pantalla a 20 centímetros.","Cada 20 minutos, descansar la vista mirando a lo lejos (6m) por 20 segundos.","Usar el dispositivo hasta las 20:00 horas."], ans: 2, exp: "Descansar la vista cada 20 minutos por 20 segundos previene la fatiga ocular y protege la salud visual." },
+  { q: "¿Qué implica la fase de 'Abuso' de la tecnología según el espectro?", opts: ["Dar prioridad a tareas escolares.","Jugar 45 minutos al día.","El tiempo excesivo afecta el sueño, la alimentación y genera estados ansiosos e irritabilidad.","Dejar el celular cargando toda la noche."], ans: 2, exp: "El abuso ocurre cuando los hábitos vitales (sueño, comida) y el humor (ansiedad/irritabilidad) se ven negativamente afectados." },
+  { q: "¿Cuál de los siguientes es un Riesgo Social del uso excesivo?", opts: ["Distracción en clases, aislamiento familiar y dificultad para comunicarse cara a cara.","Sedentarismo y aumento de peso.","La luz azul inhibe la melatonina.","Dolor de cuello (cuello de texto)."], ans: 0, exp: "El aislamiento, la falta de comunicación real y la distracción se clasifican como riesgos sociales." },
+  { q: "Para evitar la presión social sobre los niños, ¿qué estrategia familiar se recomienda?", opts: ["Prohibir a todos los amigos.","Establecer acuerdos con las familias de los amigos para organizar tiempos de conexión conjuntos.","Comprar los mismos juegos.","Ignorar la situación."], ans: 1, exp: "Hacer acuerdos o 'pactos' con otras familias ayuda a sincronizar horarios y crear una red de apoyo comunitaria." },
+];
+
+let q2i = 0, q2score = 0;
+
+function loadQ2() {
+  const q = quiz2[q2i];
+  document.getElementById('q2-text').textContent = `${q2i+1}. ${q.q}`;
+  document.getElementById('q2-progress').textContent = `PREGUNTA ${q2i+1} DE ${quiz2.length}`;
+  const opts = document.getElementById('q2-opts');
+  opts.innerHTML = '';
+  q.opts.forEach((o, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'quiz-opt';
+    btn.textContent = o;
+    btn.onclick = () => selectQ2(i);
+    opts.appendChild(btn);
+  });
+  document.getElementById('q2-feedback').className = 'quiz-feedback';
+  document.getElementById('q2-next').style.display = 'none';
+}
+
+function selectQ2(i) {
+  const q = quiz2[q2i];
+  const opts = document.querySelectorAll('#q2-opts .quiz-opt');
+  opts.forEach(o => o.onclick = null);
+  const fb = document.getElementById('q2-feedback');
+  
+  if (i === q.ans) {
+    opts[i].classList.add('correct');
+    q2score++;
+    fb.className = 'quiz-feedback show ok';
+    fb.innerHTML = `<strong>¡Correcto!</strong><br>${q.exp}`;
+  } else {
+    opts[i].classList.add('wrong');
+    opts[q.ans].classList.add('correct');
+    fb.className = 'quiz-feedback show fail';
+    fb.innerHTML = `<strong>Incorrecto</strong><br>${q.exp}`;
+  }
+  const nextBtn = document.getElementById('q2-next');
+  nextBtn.style.display = 'block';
+  nextBtn.textContent = q2i < quiz2.length - 1 ? 'Siguiente Pregunta →' : 'Ver Resultados Completos';
+}
+
+function nextQ2() {
+  q2i++;
+  if (q2i >= quiz2.length) { showQ2Result(); return; }
+  loadQ2();
+}
+
+function showQ2Result() {
+  document.getElementById('quiz2-container').style.display = 'none';
+  document.getElementById('quiz2-result').style.display = 'block';
+  const pct = q2score / quiz2.length;
+  document.getElementById('quiz2-emoji').textContent = pct >= 0.8 ? '🏆' : pct >= 0.6 ? '👍' : '📖';
+  document.getElementById('quiz2-score').textContent = `${q2score} / ${quiz2.length} Correctas`;
+  document.getElementById('quiz2-msg').textContent = pct >= 0.8 ? '¡Felicidades! Demuestras un excelente manejo de la reeducación y hábitos de vida digital saludable.' : pct >= 0.6 ? 'Buen esfuerzo. Repasa la regla 2x2x2 y el espectro digital para perfeccionar tu conocimiento.' : 'No te preocupes, el mundo digital es complejo. Revisa las secciones desplegables e inténtalo de nuevo.';
+}
+
+function resetQ2() {
+  q2i = 0; q2score = 0;
+  document.getElementById('quiz2-container').style.display = 'block';
+  document.getElementById('quiz2-result').style.display = 'none';
+  loadQ2();
+}
+
 // ====== QUIZ 3 (BEBIDAS ALCOHÓLICAS Y ENERGIZANTES) ======
 const quiz3 = [
   { q: "¿Por qué es ALTAMENTE peligroso mezclar bebidas energizantes con alcohol?", opts: ["Porque cambia el sabor de la bebida.","Porque la cafeína enmascara los efectos de la borrachera, aumentando el riesgo de coma etílico.","Porque te da sueño más rápido.","No es peligroso."], ans: 1, exp: "La cafeína te hace sentir 'alerta' aunque estés intoxicado, disparando conductas de riesgo y fallas cardíacas." },
@@ -856,6 +1615,8 @@ function resetQ3() {
 }
 
 // INIT
+loadQ1();
+loadQ2();
 loadQ3();
 </script>
 </body>
